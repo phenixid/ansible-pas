@@ -6,6 +6,9 @@ Installs a headless PhenixID Authentication Server as a `systemd` service. The s
 Role Variables
 --------------
 
+``source``
+This variable points out a local installation binary on the control machine. Example: ``{  type: "installer", local_path: "~/phxid_server_linux_x64_3_2_0.sh" }``
+
 ``pas_home``
 Set this variable to use a custom install directory. Default: `/opt/phenixid/pas`
 
@@ -20,6 +23,9 @@ Set this variable to use a custom log4j2 configuration file. Default: `log4j2.xm
  
 ``start_script_template``
 Set this variable to use a custom start script template. Default: `start-PhenixID.sh.j2`
+
+``license_file``
+This variable point out a local license file on the control machine. Required.
 
 ``license_password``
 License file password. Required.

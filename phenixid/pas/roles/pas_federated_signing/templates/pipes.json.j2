@@ -55,7 +55,7 @@
         "name": "CreateShortTermKeyStoreValve",
         "enabled": "true",
         "config": {
-          "subjectKeyParamater": "CN={{ '{{item.givenName}}' }} {{ '{{item.sn}}' }} ({{ '{{item.mail}}' }}),dc=ad,dc=stockholm,dc=se",
+          "subjectKeyParamater": "{{ subject_key_parameter }}",
           "caTemplateKeyParamater": "customsignca",
           "keyUsage": [
             "true",
