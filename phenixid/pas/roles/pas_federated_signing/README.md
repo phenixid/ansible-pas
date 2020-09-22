@@ -7,15 +7,25 @@ Role Variables
 --------------
 
 ``allowed_logout_target`` Required
+
 ``certificate_directory`` Required
+
 ``jwt_certificate`` Required
+
 ``subject_key_parameter`` Required
+
 ``signing_authenticators_url`` Default: `{{ signing_public_host }}/pdf_sign/authenticate`
+
 ``signing_authenticator_alias`` Default: `pdf_sign_auth_00`
+
 ``signing_authenticator_url`` Default: `{{ signing_authenticators_url }}/{{ signing_authenticator_alias }}`
+
 ``sp_authenticator_alias`` Default: `pdf_sign_auth_01`
+
 ``sp_acs_url`` Default: `{{ signing_authenticators_url }}/{{ sp_authenticator_alias }}`
+
 ``sp_acs_pipe_id`` Default: `signing_assertion_consumer`
+
 ``sp_success_url`` Default: `/pdf_sign/sign/api/sign`
 
 Example Playbook

@@ -7,12 +7,19 @@ Role Variables
 --------------
 
 ``idp_id`` Required
+
 ``idp_metadata`` Required
+
 ``idp_sso_url`` Required
+
 ``sp_id`` Required
+
 ``sp_metadata`` Required
+
 ``sp_acs_url`` Required, provided by role `pas_federated_signing`
+
 ``sp_acs_pipe_id`` Required, provided by role `pas_federated_signing`
+
 ``sp_success_url`` Required, provided by role `pas_federated_signing`
 
 Example Playbook

@@ -7,7 +7,9 @@ Role Variables
 --------------
 
 ``idp_metadata`` Required
+
 ``idp_id`` Required
+
 ``idp_sso_url`` Required
 
 Example Playbook
