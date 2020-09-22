@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2015 PhenixID AB (http://phenixid.net) - All Rights Reserved
+  ~
+  ~  Proprietary and confidential
+  ~
+  ~  Unauthorized copying and distribution of this file (via any medium) is strictly prohibited
+  ~
+  ~  For more information please contact: info@phenixid.se
+  -->
+
+<Configuration monitorInterval="30">
+    <Appenders>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d [%c{1}]  %p: %m%n"/>
+        </Console>
+        <RollingFile
+                name="FILE"
+                fileName="logs/server.log"
+                filePattern="logs/server.%date{yyyy-MM-dd}.log"
+                append="false">
+            <PatternLayout pattern="%d [%c{1}]  %p: %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+            </Policies>
+        </RollingFile>
+        <RollingFile
+                name="EVENT"
+                fileName="logs/event.log"
+                filePattern="logs/event.%date{yyyy-MM-dd}.log"
+                append="false">
+            <PatternLayout pattern="%d [%c{1}]  %p: %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <AsyncLogger name="com.phenixidentity" level="INFO"/>
+        <AsyncLogger name="io.netty" level="WARN"/>
+        <AsyncLogger name="com.hazelcast" level="INFO"/>
+        <AsyncLogger name="org.vertx" level="WARN"/>
+        <AsyncLogger name="com.orientechnologies" level="WARN"/>
+        <Logger name="EVENT" level="INFO" additivity="false">
+            <AppenderRef ref="EVENT"/>
+        </Logger>
+        <Root level="WARN">
+            <AppenderRef ref="FILE"/>
+        </Root>
+    </Loggers>
+</Configuration>

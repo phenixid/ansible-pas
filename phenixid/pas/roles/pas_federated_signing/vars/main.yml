@@ -1,0 +1,7 @@
+signing_authenticators_url: "{{ signing_public_host }}/pdf_sign/authenticate"
+signing_authenticator_alias: "pdf_sign_auth_00"
+signing_authenticator_url: "{{ signing_authenticators_url }}/{{ signing_authenticator_alias }}"
+sp_authenticator_alias: "pdf_sign_auth_01"
+sp_acs_url: "{{ signing_authenticators_url }}/{{ sp_authenticator_alias }}"
+sp_acs_pipe_id: "signing_assertion_consumer"
+sp_success_url: "/pdf_sign/sign/api/sign"

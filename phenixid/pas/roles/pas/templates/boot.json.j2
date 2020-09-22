@@ -1,0 +1,48 @@
+{
+  "description": "PhenixID Server boot configuration",
+  "defaults": {
+    "default_modules": [
+      {
+        "name": "com.phenixidentity~phenix-session-manager",
+        "scope": "global",
+        "singleton": "true",
+        "config": {
+          "cluster_config": "config/sessions.xml"
+        }
+      },
+      {
+        "name": "com.phenixidentity~phenix-crypto",
+        "scope": "global",
+        "singleton": "true",
+        "config": {}
+      },
+      {
+        "name": "com.phenixidentity~phenix-ca",
+        "singleton": "true",
+        "config": {
+          "enableHttp": "false"
+        }
+      }
+    ]
+  },
+  "allowonlinelicensecheck": "true",
+  "licensePassword": "{{ license_password }}",
+  "deploy": [
+    {
+      "name": "com.phenixidentity~phenix-store-json",
+      "synchronous": "true",
+      "address": "com.phenixidentity.configuration",
+      "config": {
+        "store.file": "./config/phenix-store.json",
+        "persistsessions": "false",
+        "encryption.key": "{{ encryption_key }}",
+        "enabled": "true",
+        "persistent": "true",
+        "api_enabled": "true",
+        "api_use_ssl": "false",
+        "api_host": "{{ config_api_host }}",
+        "api_port": "{{ config_api_port }}"
+      }
+    }
+  ]
+}

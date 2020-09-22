@@ -1,0 +1,68 @@
+[
+  {
+    "id": "d934085a-7919-4c2f-b1a3-5af58d4ae8c4",
+    "name": "com.phenixidentity~phenix-pipes",
+    "scope": "global",
+    "singleton": "true",
+    "config": {
+      "http_configuration_ref": "httpPrivate",
+      "http_enabled": "true"
+    }
+  },
+  {
+    "name": "com.phenixidentity~auth-http",
+    "enabled": "true",
+    "id": "d0e438ab-f08b-4cf8-9096-9898e32c41d0",
+    "config": {
+      "root_uri": "/config",
+      "allowedLogoutTarget": "{{ allowed_logout_target }}",
+      "http_configuration_ref" : "5efdd8a7-f12b-4c93-9857-0b74bf98e888"
+    }
+  },
+  {
+    "name": "com.phenixidentity~auth-http",
+    "enabled": "true",
+    "id": "83681020-3532-4247-9fab-b33a9751aa43",
+    "config": {
+      "root_uri": "/config",
+      "http_configuration_ref" : "httpPrivate"
+    }
+  },
+  {
+    "id": "pdf_sign_prism_00",
+    "name": "com.phenixidentity~phenix-prism",
+    "enabled": "true",
+    "config": {
+      "base_url": "/pdf_sign",
+      "auth_redirect_url": "{{ signing_authenticator_url }}",
+      "module_refs": "pdf_sign_prism_01",
+      "http_configuration_ref": "5efdd8a7-f12b-4c93-9857-0b74bf98e888"
+    }
+  },
+  {
+    "id": "pdf_sign_prism_01",
+    "name": "com.phenixidentity~phenix-prism-fedsigning",
+    "enabled": "false",
+    "prism_enabled": "true",
+    "config": {
+      "display_name": "PhenixID Signing Service",
+      "base_uri": "sign",
+      "sign_auth_redirect_url": "{{ sp_acs_url }}",
+      "sign_pipe": "pdf_sign_sign_pipe_01",
+      "http_configuration_ref" : "5efdd8a7-f12b-4c93-9857-0b74bf98e888"
+    }
+  },
+  {
+    "id": "files_01",
+    "name": "com.phenixidentity~phenix-files",
+    "enabled": "true",
+    "config": {
+      "read_only": "false",
+      "name": "integration_dev",
+      "auth_method": "pipe",
+      "auth_pipe": "files_auth_01",
+      "store_impl": "com.phenixidentity.files.internal.SessionFilesStore",
+      "http_configuration_ref" : "httpPrivate"
+    }
+  }
+]

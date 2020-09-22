@@ -1,0 +1,52 @@
+---
+
+- name: "Read modules file"
+  set_fact:
+    modules: "{{ lookup('template', 'modules.json.j2') }}"
+
+- name: "Get node groups"
+  uri:
+    method: GET
+    url: "{{ config_api_url }}/config/node_groups"
+    body_format: json
+    return_content: yes
+  register: node_groups
+
+- name: "Filter for default node group"
+  set_fact:
+    default_node_group: "{{ node_groups.content | from_json | json_query('[?name==`default`] | [0] | id') }}"
+
+- name: "Add modules"
+  uri:
+    method: PUT
+    url: "{{ config_api_url }}/config/modules"
+    body: "{{ modules }}"
+    body_format: json
+
+- name: "Add module refs to default node group"
+  uri:
+    method: PUT
+    url: "{{ config_api_url }}/config/node_groups/{{ default_node_group }}/module_refs"
+    body_format: json
+    body: "{{ modules | json_query('[*].id') }}"
+
+- name: "Add resources"
+  uri:
+    method: PUT
+    url: "{{ config_api_url }}/config/resources"
+    body: "{{ lookup('template', 'resources.json.j2') }}"
+    body_format: json
+
+- name: "Add keystores"
+  uri:
+    method: PUT
+    url: "{{ config_api_url }}/config/keystores"
+    body: "{{ lookup('template', 'keystores.json.j2') }}"
+    body_format: json
+
+- name: "Add ca_configurations"
+  uri:
+    method: PUT
+    url: "{{ config_api_url }}/config/ca_configurations"
+    body: "{{ lookup('template', 'ca_configurations.json.j2') }}"
+    body_format: json

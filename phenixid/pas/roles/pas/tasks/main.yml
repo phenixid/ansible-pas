@@ -1,0 +1,87 @@
+---
+
+- name: "delete install directory {{ pas_home }}"
+  file:
+    path: "{{ pas_home }}"
+    state: absent
+  become: yes
+
+- name: "create install directory {{ pas_home }}"
+  file:
+    path: "{{ pas_home }}/{{ item }}"
+    state: directory
+    owner: {{ user }}
+  with_items:
+    - "license"
+    - "config"
+  become: yes
+
+- name: "upload {{ source.local_path }}"
+  copy:
+    src: "{{ source.local_path }}"
+    dest: "/tmp/"
+    mode: 0700
+    force: yes
+    owner: {{ user }}
+
+- name: "render install.varfile"
+  template:
+    src: install.varfile.j2
+    dest: "/tmp/install.varfile"
+    owner: {{ user }}
+
+- name: "install from installer {{ source.local_path | basename }}"
+  command: "/tmp/{{ source.local_path | basename }} -q -varfile /tmp/install.varfile"
+  when: source.type == "installer"
+
+- name: "install from zip {{ source.local_path | basename }}"
+  unarchive:
+    remote_src: yes
+    src: "/tmp/{{ source.local_path | basename }}"
+    dest: "{{ pas_home }}"
+    owner: {{ user }}
+  when: source.type == "zip"
+
+- name: "remove mods"
+  file:
+    path: "{{ pas_home }}/mods"
+    state: absent
+    owner: {{ user }}
+
+- name: "render sessions.xml"
+  template:
+    src: sessions.xml.j2
+    dest: "{{ pas_home }}/config/sessions.xml"
+    owner: {{ user }}
+
+- name: "render boot.json"
+  template:
+    src: boot.json.j2
+    dest: "{{ pas_home }}/config/boot.json"
+    owner: {{ user }}
+
+- name: "render start-PhenixID.sh"
+  template:
+    src: "{{ start_script_template }}"
+    dest: "{{ pas_home }}/bin/start-PhenixID.sh"
+    owner: {{ user }}
+
+- name: "add log4j2.xml"
+  copy:
+    src: "{{ log4j2_config_file }}"
+    dest: "{{ pas_home }}/config/log4j2.xml"
+    owner: {{ user }}
+
+- name: "add license"
+  copy:
+    src: "{{ license_file }}"
+    dest: "{{ pas_home }}/license/license.p12"
+    owner: {{ user }}
+
+- name: "upload phenixid-pas service"
+  template:
+    src: pas.service.j2
+    dest: "/lib/systemd/system/pas.service"
+    mode: 644
+  become: yes
+

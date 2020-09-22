@@ -1,0 +1,8 @@
+[Unit]
+Description=PhenixID Authentication Service
+
+[Service]
+Type=forking
+WorkingDirectory={{ pas_home }}
+ExecStart={{ pas_home }}/bin/start-PhenixID.sh
+SuccessExitStatus=143

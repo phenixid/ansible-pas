@@ -1,0 +1,9 @@
+---
+# defaults file for pas
+
+log4j2_config_file: "log4j2.xml"
+start_script_template: "start-PhenixID.sh.j2"
+java_cmd: "{{ pas_home }}/jre/bin/java"
+java_heap_size: "2G"
+config_api_port: "9443"
+hazelcast_port: 5701
