@@ -3,7 +3,7 @@
     "id": "bba08a8e-acad-4d73-8f61-d690c478a9bb",
     "content_type": "application/xml",
     "content_encoding": "base64",
-    "content": "{{ lookup('template', sp_metadata) | b64encode }}"
+    "content": "{{ lookup('file', sp_metadata) | b64encode }}"
   },
   {
     "id": "5994b9a2-289e-4627-9dde-bef577cde0c4",

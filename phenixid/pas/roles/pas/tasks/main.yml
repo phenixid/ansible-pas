@@ -42,12 +42,6 @@
     owner: "{{ user }}"
   when: source.type == "zip"
 
-- name: "remove mods"
-  file:
-    path: "{{ pas_home }}/mods"
-    state: absent
-    owner: "{{ user }}"
-
 - name: "render sessions.xml"
   template:
     src: sessions.xml.j2
@@ -60,13 +54,13 @@
     dest: "{{ pas_home }}/config/boot.json"
     owner: "{{ user }}"
 
-- name: "render start-PhenixID.sh"
+- name: "render start script"
   template:
     src: "{{ start_script_template }}"
     dest: "{{ pas_home }}/bin/start-PhenixID.sh"
     owner: "{{ user }}"
 
-- name: "add log4j2.xml"
+- name: "add log configuration"
   copy:
     src: "{{ log4j2_config_file }}"
     dest: "{{ pas_home }}/config/log4j2.xml"

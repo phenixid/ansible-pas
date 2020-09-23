@@ -3,6 +3,6 @@
     "id": "5994b9a2-289e-4627-9dde-bef577cde0c4",
     "content_type": "application/xml",
     "content_encoding": "base64",
-    "content": "{{ lookup('template', idp_metadata) | b64encode }}"
+    "content": "{{ lookup('file', idp_metadata) | b64encode }}"
   }
 ]
