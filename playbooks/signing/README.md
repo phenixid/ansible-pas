@@ -31,7 +31,7 @@ The following steps are executed on the control machine only.
      Put the certificates in the `files` directory. Example files are included.
      
 1) Open the `hosts` file and: 
-     - add IP addresses or DNS names of the signing service host machines to the group `[sign]`. The specified hosts must be ssh accessible from the control machine
+     - add IP addresses or DNS names of all target machines to the group `[sign]`
      - specify the public URL of the signing service in the group `[all:vars]`
      
 1) Open the playbook `sign.yml` and ensure that the variables are correctly configured.
