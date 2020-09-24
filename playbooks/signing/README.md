@@ -1,0 +1,94 @@
+# Signing Service
+
+## Requirements
+
+ - One control machine with `python3` installed. This machine will execute the Ansible playbooks.
+ 
+ - One or more target machines with `python3` installed. These machines will be provisioned with a PAS installation and configured for federated PDF signing.
+ 
+ - The target machines must allow incoming SSH traffic from the control machine
+ 
+ - The target machines must allow incoming TCP traffic on port 9443 (the config API port) from the control machine
+ 
+  - The target machines must allow incoming TCP traffic on port 5702 (Hazelcast session cluster) from all other target machines
+ 
+## Preparations
+
+The following steps are executed on the control machine only.
+ 
+1) Fetch a PAS installer (e.g. `phxid_server_linux_x64_3_2_0.sh`) and a valid license.
+
+1) Fetch or create SAML metadata files:
+     - metadata for the Signing Service Provider 
+     - metadata for the Identity Provider
+     
+   Put the files in the `files` directory. Example files are included.
+
+1) Fetch or create certificates:
+     - a certificate for JWT signing 
+     - a PKCS12 certificate store for the internal Certificate Authority
+
+     Put the certificates in the `files` directory. Example files are included.
+     
+1) Open the `hosts` file and: 
+     - add IP addresses or DNS names of the signing service host machines to the group `[sign]`. The specified hosts must be ssh accessible from the control machine
+     - specify the public URL of the signing service in the group `[all:vars]`
+     
+1) Open the playbook `sign.yml` and ensure that the variables are correctly configured.
+     - the variable name `inventory_hostname` refers to the host names in the `hosts` file
+     - file paths are relative to the `files` directory
+
+## Set up Ansible 
+
+The following steps are executed on the control machine only.
+
+#### Create virtual environment
+
+```
+python3 -m venv env
+```
+
+#### Activate virtual environment
+```
+source env/bin/activate
+```
+
+#### Upgrade pip
+```
+pip install --upgrade pip
+```
+
+#### Install dependencies
+```
+pip install -r requirements.txt
+```
+
+#### Ensure ssh connectivity
+```
+ansible --inventory=hosts all -m ping
+```
+
+#### Install roles
+```
+ansible-galaxy collection install -f git+https://github.com/phenixidentity/ansible-pas.git#phenixid/pas
+```
+
+## Install and start Signing Service
+
+#### Run playbook
+```
+ansible-playbook --user=<user> --inventory=hosts sign.yml
+```
+
+## Verify installation
+
+Suggestion: install `jq` for convenient handling of json data on the command line.
+
+ - On the target machines:
+    - Check server logs in directory `/opt/phenixid/pas/logs`
+    - Ensure that the Hazelcast cluster `phenixid-sessions` is set up between all the target machines
+ 
+ - From the control machines: 
+    - Check server configurations: `curl http://<ip-to-target-machine>:9443/config | jq '.'`
+    - Verify that the Health Check is ok: `curl http://<ip-to-target-machine>:8444/pipes/phenix/health` (don't mind the error message for now, only the status code 200 is important)
+    - Verify Service Provider Meta data: `curl http://<ip-to-target-machine>:80/pdf_sign/authenticate/pdf_sign_auth_01?getSPMeta`
