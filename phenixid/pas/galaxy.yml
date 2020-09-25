@@ -17,18 +17,18 @@ readme: README.md
 # A list of the collection's content authors. Can be just the name or in the format 'Full Name <email> (url)
 # @nicks:irc/im.site#channel'
 authors:
-- your name <example@domain.com>
+- Måns Rolandi
 
 
 ### OPTIONAL but strongly recommended
 
 # A short summary description of the collection
-description: your collection description
+description: Installing, configuring and managing the PhenixID Authentication Server
 
 # Either a single license or a list of licenses for content inside of a collection. Ansible Galaxy currently only
 # accepts L(SPDX,https://spdx.org/licenses/) licenses. This key is mutually exclusive with 'license_file'
 license:
-- GPL-2.0-or-later
+- EPL-2.0
 
 # The path to the license file for the collection. This path is relative to the root of the collection. This key is
 # mutually exclusive with 'license'
@@ -45,13 +45,10 @@ tags: []
 dependencies: {}
 
 # The URL of the originating SCM repository
-repository: http://example.com/repository
+repository: https://github.com/phenixid/ansible-pas
 
 # The URL to any online docs
-documentation: http://docs.example.com
-
-# The URL to the homepage of the collection/project
-homepage: http://example.com
+documentation: https://document.phenixid.se
 
 # The URL to the collection issue tracker
-issues: http://example.com/issue/tracker
+issues: https://github.com/phenixid/ansible-pas/issues
