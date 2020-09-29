@@ -13,9 +13,9 @@ echo "INFO: Using PHENIX_VERSION: ${PHENIX_VERSION}"
 # Java settings
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-JAVA={{ java_cmd }}
+JAVA="$PHENIX_HOME/jre/bin/java"
 
-JAVA_HEAP_SIZE={{ java_heap_size }}
+JAVA_HEAP_SIZE=2G
 
 JAVA_OPTS="-server -d64"
 

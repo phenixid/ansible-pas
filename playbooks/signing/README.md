@@ -2,19 +2,28 @@
 
 ## Requirements
 
- - One control machine with `python3` installed. This machine will execute the Ansible playbooks.
+ - One **control machine** with 
  
- - One or more target machines with `python3` installed. These machines will be provisioned with a PAS installation and configured for federated PDF signing.
+    - `python3` 
+   
+   This machine will execute the Ansible playbooks.
+ 
+ - One or more **target machines** with 
+ 
+    - `python3` 
+    - `systemd`
+   
+   These machines will be provisioned with a PAS installation and configured for federated PDF signing. The service will be managed by `systemd`.
  
  - The target machines must allow incoming SSH traffic from the control machine
  
  - The target machines must allow incoming TCP traffic on port 9443 (the config API port) from the control machine
  
-  - The target machines must allow incoming TCP traffic on port 5702 (Hazelcast session cluster) from all other target machines
+ - The target machines must allow incoming TCP traffic on port 5702 (Hazelcast session cluster) from all other target machines
  
 ## Preparations
 
-The following steps are executed on the control machine only.
+The following steps are executed on the **control machine** only.
  
 1) Fetch a PAS installer (e.g. `phxid_server_linux_x64_3_2_0.sh`) and a valid license.
 
@@ -40,26 +49,18 @@ The following steps are executed on the control machine only.
 
 ## Set up Ansible 
 
-The following steps are executed on the control machine only.
+The following steps are executed on the **control machine** only.
 
 #### Create virtual environment
 
 ```
 python3 -m venv env
-```
-
-#### Activate virtual environment
-```
 source env/bin/activate
 ```
 
-#### Upgrade pip
+#### Upgrade pip and install dependencies
 ```
 pip install --upgrade pip
-```
-
-#### Install dependencies
-```
 pip install -r requirements.txt
 ```
 
@@ -82,13 +83,15 @@ ansible-playbook --user=<user> --inventory=hosts sign.yml
 
 ## Verify installation
 
+If there are problems, here are some steps to verify the installation.
 Suggestion: install `jq` for convenient handling of json data on the command line.
 
- - On the target machines:
+ - On **target machines**:
+    - Verify service is running: `sudo journalctl -f -u pas`
     - Check server logs in directory `/opt/phenixid/pas/logs`
-    - Ensure that the Hazelcast cluster `phenixid-sessions` is set up between all the target machines
+    - Ensure that the Hazelcast cluster `phenixid-sessions` is set up between all the target machines by examining the logs
  
- - From the control machines: 
+ - From the **control machine**: 
     - Check server configurations: `curl http://<ip-to-target-machine>:9443/config | jq '.'`
     - Verify that the Health Check is ok: `curl http://<ip-to-target-machine>:8444/pipes/phenix/health` (don't mind the error message for now, only the status code 200 is important)
     - Verify Service Provider Meta data: `curl http://<ip-to-target-machine>:80/pdf_sign/authenticate/pdf_sign_auth_01?getSPMeta`

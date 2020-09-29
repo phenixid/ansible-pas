@@ -1,12 +1,27 @@
 ---
 
-- name: "delete install directory {{ pas_home }}"
+- name: "Remove directories"
   file:
-    path: "{{ pas_home }}"
+    path: "{{ pas_home }}/{{ item }}"
     state: absent
-  become: yes
+    owner: ec2-user
+  with_items:
+    - "bin"
+    - "classes"
+    - "config"
+    - "data"
+    - "jre"
+    - "lib"
+    - "license"
+    - "mods"
+    - "repo"
+    - "repos.txt"
+    - "resources"
+    - "tokensin"
+    - "tokensout"
+    - "uninstall"
 
-- name: "create install directory {{ pas_home }}"
+- name: "Create install directory {{ pas_home }}"
   file:
     path: "{{ pas_home }}/{{ item }}"
     state: directory
@@ -16,63 +31,55 @@
     - "config"
   become: yes
 
-- name: "upload {{ source.local_path }}"
-  copy:
-    src: "{{ source.local_path }}"
-    dest: "/tmp/"
-    mode: 0700
-    force: yes
-    owner: "{{ user }}"
-
-- name: "render install.varfile"
+- name: "Render install.varfile"
   template:
     src: install.varfile.j2
-    dest: "/tmp/install.varfile"
+    dest: "{{ pas_home }}/install.varfile"
     owner: "{{ user }}"
 
-- name: "install from installer {{ source.local_path | basename }}"
-  command: "/tmp/{{ source.local_path | basename }} -q -varfile /tmp/install.varfile"
+- name: "Install from installer {{ source.local_path | basename }}"
+  command: "{{ source.remote_path }}/{{ source.local_path | basename }} -q -varfile {{ pas_home }}/install.varfile"
   when: source.type == "installer"
 
-- name: "install from zip {{ source.local_path | basename }}"
+- name: "Install from zip {{ source.local_path | basename }}"
   unarchive:
     remote_src: yes
-    src: "/tmp/{{ source.local_path | basename }}"
+    src: "{{ source.remote_path }}/{{ source.local_path | basename }}"
     dest: "{{ pas_home }}"
     owner: "{{ user }}"
   when: source.type == "zip"
 
-- name: "render sessions.xml"
+- name: "Render sessions.xml"
   template:
     src: sessions.xml.j2
     dest: "{{ pas_home }}/config/sessions.xml"
     owner: "{{ user }}"
 
-- name: "render boot.json"
+- name: "Render boot.json"
   template:
     src: boot.json.j2
     dest: "{{ pas_home }}/config/boot.json"
     owner: "{{ user }}"
 
-- name: "render start script"
-  template:
-    src: "{{ start_script_template }}"
+- name: "Add start script"
+  copy:
+    src: "{{ start_script_file }}"
     dest: "{{ pas_home }}/bin/start-PhenixID.sh"
     owner: "{{ user }}"
 
-- name: "add log configuration"
+- name: "Add log configuration"
   copy:
     src: "{{ log4j2_config_file }}"
     dest: "{{ pas_home }}/config/log4j2.xml"
     owner: "{{ user }}"
 
-- name: "add license"
+- name: "Add license"
   copy:
     src: "{{ license_file }}"
     dest: "{{ pas_home }}/license/license.p12"
     owner: "{{ user }}"
 
-- name: "upload phenixid-pas service"
+- name: "Upload phenixid-pas service"
   template:
     src: pas.service.j2
     dest: "/lib/systemd/system/pas.service"

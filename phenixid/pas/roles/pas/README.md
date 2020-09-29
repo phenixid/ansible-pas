@@ -21,8 +21,8 @@ Set this variable to change the default Java heap size. Default: `2G`
 ``log4j2_config_file``
 Set this variable to use a custom log4j2 configuration file. Default: `log4j2.xml`
  
-``start_script_template``
-Set this variable to use a custom start script template. Default: `start-PhenixID.sh.j2`
+``start_script_file``
+Set this variable to use a custom start script file. Default: `start-PhenixID.sh`
 
 ``license_file``
 This variable point out a local license file on the control machine. Required.
