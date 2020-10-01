@@ -66,12 +66,14 @@
     src: "{{ start_script_file }}"
     dest: "{{ pas_home }}/bin/start-PhenixID.sh"
     owner: "{{ user }}"
+  when: start_script_file is defined
 
 - name: "Add log configuration"
   copy:
     src: "{{ log4j2_config_file }}"
     dest: "{{ pas_home }}/config/log4j2.xml"
     owner: "{{ user }}"
+  when: log4j2_config_file is defined
 
 - name: "Add license"
   copy:
