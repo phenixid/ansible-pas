@@ -54,6 +54,10 @@
     - jwt_certificate: "cert.crt"
     - ca_keystore: "cert.p12"
     - ca_keystore_password: "cCqtZmgH4WTCF2U5"
+    - subject_key_properties:
+        - "givenName"
+        - "sn"
+        - "mail"
     - subject_key_parameter: "CN={{ '{{item.givenName}}' }} {{ '{{item.sn}}' }} ({{ '{{item.mail}}' }}),dc=ad,dc=example,dc=org"
 
     - public_port: "80"

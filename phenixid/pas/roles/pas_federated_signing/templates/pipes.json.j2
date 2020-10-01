@@ -27,6 +27,14 @@
           "dest_id": "{{ '{{request.session_id}}' }}"
         }
       },
+      {% for property in subject_key_properties %}
+      {
+        "name": "PropertyFromSessionToItem",
+        "config": {
+          "source": "{{ property }}"
+        }
+      },
+      {% endfor %}
       {
         "name": "SessionLoadValve",
         "enabled": "true",
