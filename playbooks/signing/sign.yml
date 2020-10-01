@@ -46,6 +46,7 @@
 - hosts: sign
   vars:
 
+    - user: "ec2-user"
     - idp_id: "idp.phenixid.se"
     - idp_metadata: "idp.xml"
     - sp_id: "spsign.dev.digo"

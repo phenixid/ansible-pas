@@ -1,5 +1,18 @@
 ---
 
+- name: "create certs directory"
+  file:
+    path: "{{ certificate_directory }}"
+    state: directory
+    owner: "{{ user }}"
+  become: yes
+
+- name: "add key"
+  copy:
+    src: "cert.crt"
+    dest: "{{ certificate_directory }}"
+    owner: "{{ user }}"
+
 - name: "Read modules file"
   set_fact:
     modules: "{{ lookup('template', 'modules.json.j2') }}"
