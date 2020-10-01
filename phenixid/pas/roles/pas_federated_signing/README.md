@@ -14,7 +14,7 @@ Role Variables
 
 ``subject_key_parameter`` Required
 
-``signing_authenticators_url`` Default: `{{ signing_public_host }}/pdf_sign/authenticate`
+``signing_authenticators_url`` Default: `{{ signing_public_url }}/pdf_sign/authenticate`
 
 ``signing_authenticator_alias`` Default: `pdf_sign_auth_00`
 

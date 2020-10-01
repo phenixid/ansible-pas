@@ -4,4 +4,4 @@
 
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
-signing_public_host=http://signing.example.org:80
+signing_public_url=http://signing.example.org:80
