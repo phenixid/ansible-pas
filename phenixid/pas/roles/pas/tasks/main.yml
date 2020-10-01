@@ -4,7 +4,6 @@
   file:
     path: "{{ pas_home }}/{{ item }}"
     state: absent
-    owner: ec2-user
   with_items:
     - "bin"
     - "classes"
@@ -20,6 +19,7 @@
     - "tokensin"
     - "tokensout"
     - "uninstall"
+  become: yes
 
 - name: "Create install directory {{ pas_home }}"
   file:
