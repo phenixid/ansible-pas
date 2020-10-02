@@ -62,23 +62,23 @@ ansible-galaxy collection install -f git+file:///path/to/repo/.git#phenixid/pas
 
 The following steps are executed on the **control machine** only.
  
-1) Fetch a PAS installer (e.g. `phxid_server_linux_x64_3_2_0.sh`) and a valid license.
+1. Fetch a PAS installer (e.g. `phxid_server_linux_x64_3_2_0.sh`) and a valid license.
 
-1) Fetch or create SAML metadata files:
+1. Fetch or create SAML metadata files:
      - metadata for the Signing Service Provider 
      - metadata for the Identity Provider
      
    Put the files in the `files` directory. Example files are included.
 
-1) Fetch or create certificates:
+1. Fetch or create certificates:
      - a certificate for JWT signing 
      - a PKCS12 certificate store for the internal Certificate Authority
 
      Put the certificates in the `files` directory. Example files are included.
      
-1) Open the `hosts` file and add IP addresses or DNS names of all target machines to the group `[sign]`
+1. Open the `hosts` file and add IP addresses or DNS names of all target machines to the group `[sign]`
      
-1) Open the playbook `sign.yml` and ensure that the variables are correctly configured.
+1. Open the playbook `sign.yml` and ensure that the variables are correctly configured.
 
 #### Run playbook
 
