@@ -70,8 +70,19 @@ ansible --inventory=hosts --user=<user> all -m ping
 ```
 
 #### Install roles
+Install latest released version:
+```
+ansible-galaxy collection install phenixid.pas
+```
+
+Install development version from GitHub repo:
 ```
 ansible-galaxy collection install -f git+https://github.com/phenixid/ansible-pas.git#phenixid/pas
+```
+
+Install development version from local git repo:
+```
+ansible-galaxy collection install -f git+file:///path/to/repo/.git#phenixid/pas
 ```
 
 ## Install and start Signing Service
