@@ -7,9 +7,9 @@
     owner: "{{ user }}"
   become: yes
 
-- name: "add key"
+- name: "add key for jwt signing"
   copy:
-    src: "cert.crt"
+    src: "{{ jwt_certificate }}"
     dest: "{{ certificate_directory }}"
     owner: "{{ user }}"
 
