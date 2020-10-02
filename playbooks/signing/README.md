@@ -66,7 +66,7 @@ pip install -r requirements.txt
 
 #### Ensure ssh connectivity
 ```
-ansible --inventory=hosts all -m ping
+ansible --inventory=hosts --user=<user> all -m ping
 ```
 
 #### Install roles
