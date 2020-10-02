@@ -68,7 +68,7 @@ The following steps are executed on the **control machine** only.
      - metadata for the Signing Service Provider 
      - metadata for the Identity Provider
      
-   Put the files in the `files` directory. Example files are included.
+     Put the files in the `files` directory. Example files are included.
 
 1. Fetch or create certificates:
      - a certificate for JWT signing 
