@@ -1,0 +1,38 @@
+---
+# tasks file for systemd
+
+- name: "Add group {{ group }}"
+  group:
+    name: "{{ group }}"
+    system: yes
+    state: present
+  become: true
+
+- name: "Add no-login system user {{ user }}"
+  user:
+    name: "{{ user }}"
+    groups: "{{ group }}"
+    shell: /sbin/nologin
+    append: no
+    system: yes
+    state: present
+  become: true
+
+- name: "Check service {{ service_name }} is installed"
+  stat:
+    path: "/lib/systemd/system/{{ service_name }}.service"
+  register: service_stat
+
+- name: "Stop service {{ service_name }}"
+  systemd:
+    state: stopped
+    name: "{{ service_name }}"
+  become: yes
+  when: service_stat.stat.exists
+
+- name: "Install service file /lib/systemd/system/{{ service_name }}.service"
+  template:
+    src: "{{ service_name }}.service.j2"
+    dest: "/lib/systemd/system/{{ service_name }}.service"
+    mode: 0007
+  become: yes

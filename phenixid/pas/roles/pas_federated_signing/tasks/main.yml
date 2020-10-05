@@ -12,6 +12,8 @@
     src: "{{ jwt_certificate }}"
     dest: "{{ certificate_directory }}"
     owner: "{{ user }}"
+    mode: 400
+  become: yes
 
 - name: "Read modules file"
   set_fact:

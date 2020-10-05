@@ -20,3 +20,10 @@
     url: "{{ config_api_url }}/config/ca_configurations"
     body: "{{ lookup('template', 'ca_configurations.json.j2') }}"
     body_format: json
+
+- name: "Add pipes"
+  uri:
+    method: PUT
+    url: "{{ config_api_url }}/config/pipes"
+    body: "{{ lookup('template', 'pipes.json.j2') }}"
+    body_format: json
