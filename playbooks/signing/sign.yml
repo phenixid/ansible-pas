@@ -19,10 +19,10 @@
     - pas_home: "/opt/phenixid/pas"
 
   pre_tasks:
-    - name: "upload {{ source.local_path }}"
+    - name: "upload {{ pas_installer.local_path }}"
       copy:
-        src: "{{ source.local_path }}"
-        dest: "{{ source.remote_path }}/"
+        src: "{{ pas_installer.local_path }}"
+        dest: "{{ pas_installer.remote_path }}/"
         mode: 0700
         force: yes
         owner: "{{ user }}"

@@ -1,9 +1,9 @@
 ---
 
-- name: "Upload {{ source.local_path }} to {{ source.remote_path }}"
+- name: "Upload {{ pas_installer.local_path }} to {{ pas_installer.remote_path }}"
   copy:
-    src: "{{ source.local_path }}"
-    dest: "{{ source.remote_path }}/"
+    src: "{{ pas_installer.local_path }}"
+    dest: "{{ pas_installer.remote_path }}/"
     mode: 0700
     force: yes
     owner: "{{ user }}"
@@ -43,9 +43,9 @@
     owner: "{{ user }}"
   become: yes
 
-- name: "Install from installer {{ source.local_path | basename }}"
-  command: "{{ source.remote_path }}/{{ source.local_path | basename }} -q -varfile {{ pas_home }}/install.varfile"
-  when: source.type == "installer"
+- name: "Install from installer {{ pas_installer.local_path | basename }}"
+  command: "{{ pas_installer.remote_path }}/{{ pas_installer.local_path | basename }} -q -varfile {{ pas_home }}/install.varfile"
+  when: pas_installer.type == "installer"
   become: yes
   become_user: "{{ user }}"
 
