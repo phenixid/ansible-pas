@@ -6,7 +6,10 @@
         "name": "com.phenixidentity~phenix-pipes",
         "scope": "global",
         "singleton": "true",
-        "config": {}
+        "config": {
+          "http_enabled": "{{ pipes_http_enabled }}",
+          "http_configuration_ref": "{{ pipes_http_configuration_ref }}"
+        }
       },
       {
         "name": "com.phenixidentity~phenix-session-manager",

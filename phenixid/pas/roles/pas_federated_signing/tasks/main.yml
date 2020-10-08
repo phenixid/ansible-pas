@@ -1,13 +1,13 @@
 ---
 
-- name: "create certs directory"
+- name: "Create certificate directory"
   file:
     path: "{{ certificate_directory }}"
     state: directory
     owner: "{{ user }}"
   become: yes
 
-- name: "add key for jwt signing"
+- name: "Add certificate for jwt validation"
   copy:
     src: "{{ jwt_certificate }}"
     dest: "{{ certificate_directory }}"
