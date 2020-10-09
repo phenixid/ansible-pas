@@ -5,7 +5,7 @@
     src: "{{ jwt_certificate.local_path }}"
     dest: "{{ jwt_certificate.remote_path }}/{{ jwt_certificate.local_path | basename }}"
     owner: "{{ user }}"
-    mode: 400
+    mode: 0400
   become: yes
 
 - name: "Read modules file"

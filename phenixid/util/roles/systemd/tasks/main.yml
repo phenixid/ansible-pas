@@ -34,5 +34,5 @@
   template:
     src: "{{ service_name }}.service.j2"
     dest: "/lib/systemd/system/{{ service_name }}.service"
-    mode: 0007
+    mode: 0644
   become: yes

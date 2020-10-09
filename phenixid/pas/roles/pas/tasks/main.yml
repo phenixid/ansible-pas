@@ -39,7 +39,7 @@
   template:
     src: install.varfile.j2
     dest: "{{ pas_home }}/install.varfile"
-    mode: 400
+    mode: 0400
     owner: "{{ user }}"
   become: yes
 
@@ -60,7 +60,7 @@
   template:
     src: boot.json.j2
     dest: "{{ pas_home }}/config/boot.json"
-    mode: 400
+    mode: 0400
     owner: "{{ user }}"
   become: yes
 
@@ -84,6 +84,6 @@
   copy:
     src: "{{ license_file }}"
     dest: "{{ pas_home }}/license/license.p12"
-    mode: 400
+    mode: 0400
     owner: "{{ user }}"
   become: yes
