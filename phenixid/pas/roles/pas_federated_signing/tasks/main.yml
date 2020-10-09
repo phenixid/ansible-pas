@@ -1,16 +1,9 @@
 ---
 
-- name: "Create certificate directory"
-  file:
-    path: "{{ certificate_directory }}"
-    state: directory
-    owner: "{{ user }}"
-  become: yes
-
 - name: "Add certificate for jwt validation"
   copy:
-    src: "{{ jwt_certificate }}"
-    dest: "{{ certificate_directory }}"
+    src: "{{ jwt_certificate.local_path }}"
+    dest: "{{ jwt_certificate.remote_path }}/{{ jwt_certificate.local_path | basename }}"
     owner: "{{ user }}"
     mode: 400
   become: yes

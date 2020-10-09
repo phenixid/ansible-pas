@@ -149,7 +149,7 @@
         "enabled": "true",
         "config": {
           "access_token": "access_token",
-          "certfilepath": "{{ certificate_directory }}/{{ jwt_certificate }}",
+          "certfilepath": "{{ jwt_certificate.remote_path }}/{{ jwt_certificate.local_path | basename }}",
           "additional_attributes": [
             "id",
             "failURL",
