@@ -1,0 +1,94 @@
+{
+  "publicUrl": "{{ digo_service_url }}",
+  "primaryServerPort": {{ digo_public_port }},
+  "database": {
+    "url": "{{ db_url }}",
+    "user": "{{ db_user }}",
+    "password": "{{ db_password }}",
+    "maxPoolSize": "5",
+    "changelog": "db_migrations/changelog.master.xml",
+    "migrations_enabled": true,
+    "driver_class": "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+  },
+  "events": {
+    "replayBatchSize": "1000"
+  },
+  "signingOrders": {
+    "expiration": {
+      "schedule": "0 0/5 * * * ?",
+      "batchInterval": 10000,
+      "batchSize": 1000
+    },
+    "fileDirectory": "files"
+  },
+  "jwt": {
+    "privateKeyFile": "{{ digo_jwt_private_key.remote_path }}/{{ digo_jwt_private_key.local_path | basename }}",
+    "publicKeyFile": "{{ digo_jwt_public_key.remote_path }}/{{ digo_jwt_public_key.local_path | basename }}"
+  },
+  "signingService": {
+    "url": "{{ signing_service_url }}/"
+  },
+  "fileService": {
+    "url": "{{ file_service_url }}",
+    "username": "{{ file_service_username }}",
+    "password": "{{ file_service_password }}"
+  },
+  "saml": {
+    "postSsoUrl": "{{ idp_sso_url }}",
+    "assertionConsumerServiceUrl": "{{ digo_service_url }}/auth/saml",
+    "issuerId": "{{ digo_sp_id }}",
+    "defaultLocale": "sv",
+    "attributes": {
+      "authority": "description",
+      "source": "source",
+      "firstName": "cn",
+      "lastName": "sn",
+      "mail": "mail"
+    },
+    "trustedIssuers": [
+      "{{ idp_id }}"
+    ],
+    "trustedCertificates": [
+      "{{ digo_saml_trust.remote_path }}/{{ digo_saml_trust.local_path | basename }}"
+    ]
+  },
+  "smtp": {
+    "host": "{{ digo_smtp_host }}",
+    "port": "{{ digo_smtp_port }}",
+    "trust": "{{ digo_smtp_trust }}",
+    "username": "{{ digo_smtp_username }}",
+    "password": "{{ digo_smtp_password}}",
+    "fromAddress": "{{ digo_smtp_from }}",
+    "enabled": "{{ digo_smtp_enabled }}"
+  },
+  "externalUsers": {
+    "citizensUrl": "{{ citizens_query_url }}",
+    "employeesUrl": "{{ employees_query_url }}",
+    "fobUrl": "{{ fob_query_url }}",
+    "eduUrl": "{{ edu_query_url }}",
+    "employeeAttributes": {
+      "organization": "{{ digo_employee_organization}}",
+      "userId": "{{ digo_employee_user_id}}",
+      "mail": "{{ digo_employee_mail }}",
+      "firstName": "{{ digo_employee_first_name }}",
+      "lastName": "{{ digo_employee_last_name }}",
+      "mobile": "{{ digo_employee_mobile }}",
+      "department": "{{ digo_employee_department }}"
+    },
+    "citizenAttributes": {
+      "info": "{{ digo_citizen_info }}",
+      "mail": "{{ digo_citizen_mail }}",
+      "mobile": "{{ digo_citizen_mobile }}",
+      "firstName": "{{ digo_citizen_first_name }}",
+      "lastName": "{{ digo_citizen_last_name }}"
+    }
+  },
+  "forms": [
+    {
+      "id": "document_signing",
+      "config": {
+        "some": "property"
+      }
+    }
+  ]
+}
