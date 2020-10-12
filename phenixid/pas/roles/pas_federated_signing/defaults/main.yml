@@ -1,8 +1,10 @@
 ---
-signing_authenticators_url: "{{ signing_service_url }}/authenticate"
-signing_authenticator_alias: "pdf_sign_auth_00"
-signing_authenticator_url: "{{ signing_authenticators_url }}/{{ signing_authenticator_alias }}"
+
+pas_federated_signing_authenticator_alias: "pdf_sign_auth_00"
+pas_federated_signing_authenticators_url: "{{ signing_service_url }}/authenticate"
+pas_federated_signing_authenticator_url: "{{ pas_federated_signing_authenticators_url }}/{{ pas_federated_signing_authenticator_alias }}"
+
 sp_authenticator_alias: "pdf_sign_auth_01"
-sp_acs_url: "{{ signing_authenticators_url }}/{{ sp_authenticator_alias }}"
+sp_acs_url: "{{ pas_federated_signing_authenticators_url }}/{{ sp_authenticator_alias }}"
 sp_acs_pipe_id: "signing_assertion_consumer"
 sp_success_url: "{{ signing_service_url }}/sign/api/sign"

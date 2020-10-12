@@ -1,14 +1,5 @@
 ---
 
-- name: "Upload {{ digo_installer.local_path }} to {{ digo_installer.remote_path }}"
-  copy:
-    src: "{{ digo_installer.local_path }}"
-    dest: "{{ digo_installer.remote_path }}/"
-    mode: 0700
-    force: yes
-    owner: "{{ user }}"
-  become: yes
-
 - name: "Remove directories"
   file:
     path: "{{ item }}"
@@ -20,24 +11,14 @@
     - "{{ digo_home }}/resources"
   become: yes
 
-- name: "Create directories and permissions for user {{ user }}"
-  file:
-    path: "{{ item }}"
-    state: directory
-    owner: "{{ user }}"
-    recurse: yes
-  with_items:
-    - "{{ digo_home }}"
-    - "{{ digo_home }}/config"
-    - "{{ digo_home }}/logs"
-  become: yes
-
 - name: "Install from zip file {{ digo_installer.remote_path }}/{{ source.local_path | basename }}"
   unarchive:
     remote_src: yes
     src: "{{ digo_installer.remote_path }}/{{ digo_installer.local_path | basename }}"
-    dest: "{{ digo_home }}"
+    dest: "{{ digo_install_directory }}"
     owner: "{{ user }}"
+    group: "{{ group }}"
+  become_user: "{{ user }}"
   become: yes
 
 - name: "Add keys"
@@ -56,6 +37,7 @@
   copy:
     src: "{{ digo_log4j2_config_file }}"
     dest: "{{ digo_home }}/config/log4j2.xml"
+    mode: 0400
     owner: "{{ user }}"
   become: yes
   when: digo_log4j2_config_file is defined
@@ -64,6 +46,7 @@
   copy:
     src: "{{ digo_hazelcast_config_file }}"
     dest: "{{ digo_home }}/config/hazelcast.xml"
+    mode: 0400
     owner: "{{ user }}"
   become: yes
   when: digo_hazelcast_config_file is defined
@@ -80,6 +63,7 @@
   template:
     src: "start.sh.j2"
     dest: "{{ digo_home }}/start.sh"
+    mode: 0500
     owner: "{{ user }}"
   become: yes
 
