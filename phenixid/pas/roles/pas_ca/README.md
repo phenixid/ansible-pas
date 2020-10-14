@@ -6,12 +6,6 @@ Configures PhenixID Authentication Server as a Certificate Authority.
 Role Variables
 --------------
 
-``ca_keystore`` 
-The certificate file (pkcs12).
-
-``ca_keystore_password``
-The certificate file password.
-
 Example Playbook
 ----------------
 
