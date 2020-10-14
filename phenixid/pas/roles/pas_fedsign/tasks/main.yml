@@ -25,7 +25,7 @@
 - name: "Get node groups"
   uri:
     method: GET
-    url: "{{ config_api_url }}/config/node_groups"
+    url: "{{ pas_config_api_url }}/config/node_groups"
     body_format: json
     return_content: yes
   register: node_groups
@@ -37,34 +37,34 @@
 - name: "Add modules"
   uri:
     method: PUT
-    url: "{{ config_api_url }}/config/modules"
+    url: "{{ pas_config_api_url }}/config/modules"
     body: "{{ modules }}"
     body_format: json
 
 - name: "Add module refs to default node group"
   uri:
     method: PUT
-    url: "{{ config_api_url }}/config/node_groups/{{ default_node_group }}/module_refs"
+    url: "{{ pas_config_api_url }}/config/node_groups/{{ default_node_group }}/module_refs"
     body_format: json
     body: "{{ modules | json_query('[*].id') }}"
 
 - name: "Add authenticators"
   uri:
     method: PUT
-    url: "{{ config_api_url }}/config/authenticators"
+    url: "{{ pas_config_api_url }}/config/authenticators"
     body: "{{ lookup('template', 'authenticators.json.j2') }}"
     body_format: json
 
 - name: "Add http_configurations"
   uri:
     method: PUT
-    url: "{{ config_api_url }}/config/http_configurations"
+    url: "{{ pas_config_api_url }}/config/http_configurations"
     body: "{{ lookup('template', 'http_configurations.json.j2') }}"
     body_format: json
 
 - name: "Add pipes"
   uri:
     method: PUT
-    url: "{{ config_api_url }}/config/pipes"
+    url: "{{ pas_config_api_url }}/config/pipes"
     body: "{{ lookup('template', 'pipes.json.j2') }}"
     body_format: json
