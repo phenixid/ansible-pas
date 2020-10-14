@@ -36,7 +36,7 @@
     ]
   },
   "allowonlinelicensecheck": "true",
-  "licensePassword": "{{ license_password }}",
+  "licensePassword": "{{ pas_license_password }}",
   "deploy": [
     {
       "name": "com.phenixidentity~phenix-store-json",
@@ -45,13 +45,13 @@
       "config": {
         "store.file": "./config/phenix-store.json",
         "persistsessions": "false",
-        "encryption.key": "{{ encryption_key }}",
+        "encryption.key": "{{ pas_enc_key }}",
         "enabled": "true",
         "persistent": "true",
         "api_enabled": "true",
         "api_use_ssl": "false",
-        "api_host": "{{ config_api_host }}",
-        "api_port": "{{ config_api_port }}"
+        "api_host": "{{ pas_config_api_host }}",
+        "api_port": "{{ pas_config_api_port }}"
       }
     }
   ]

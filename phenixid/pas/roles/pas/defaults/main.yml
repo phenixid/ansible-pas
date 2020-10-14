@@ -1,7 +1,6 @@
 ---
 # defaults file for pas
 
-config_api_port: "9443"
-hazelcast_port: 5702
+pas_session_cluster_port: 5702
 db_encryption_key: "dummy2"
 db_client_password: "dummy3"

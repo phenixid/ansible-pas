@@ -12,10 +12,10 @@
     <instance-name>phenixid-sessions</instance-name>
     <group>
         <name>phenixid-sessions</name>
-        <password>{{ hazelcast_password }}</password>
+        <password>{{ pas_session_cluster_password }}</password>
     </group>
     <network>
-        <port auto-increment="false" port-count="1">{{ hazelcast_port }}</port>
+        <port auto-increment="false" port-count="1">{{ pas_session_cluster_port }}</port>
         <outbound-ports>
             <!--
             Allowed port range when connecting to other nodes.
@@ -25,9 +25,9 @@
         </outbound-ports>
         <join>
             <tcp-ip enabled="true">
-                <interface>{{ hazelcast_interface }}</interface>
+                <interface>{{ pas_session_cluster_interface }}</interface>
                 <member-list>
-                    {% for host in hazelcast_members %}
+                    {% for host in pas_session_cluster_members %}
                     <member>{{ host }}</member>
                     {% endfor %}
                 </member-list>
@@ -36,7 +36,7 @@
             <aws enabled="false"/>
         </join>
         <interfaces enabled="true">
-            <interface>{{ hazelcast_interface }}</interface>
+            <interface>{{ pas_session_cluster_interface }}</interface>
         </interfaces>
     </network>
     <executor-service name="default">

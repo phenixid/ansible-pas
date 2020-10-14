@@ -66,11 +66,11 @@
 
 - name: "Add start script"
   copy:
-    src: "{{ start_script_file }}"
+    src: "{{ pas_start_script }}"
     dest: "{{ pas_home }}/bin/start-PhenixID.sh"
     owner: "{{ user }}"
   become: yes
-  when: start_script_file is defined
+  when: pas_start_script is defined
 
 - name: "Add log configuration"
   copy:
@@ -82,7 +82,7 @@
 
 - name: "Add license"
   copy:
-    src: "{{ license_file }}"
+    src: "{{ pas_license_file }}"
     dest: "{{ pas_home }}/license/license.p12"
     mode: 0400
     owner: "{{ user }}"
