@@ -37,13 +37,6 @@
     body: "{{ lookup('template', 'authenticators.json.j2') }}"
     body_format: json
 
-- name: "Add http_configurations"
-  uri:
-    method: PUT
-    url: "{{ config_api_url }}/config/http_configurations"
-    body: "{{ lookup('template', 'http_configurations.json.j2') }}"
-    body_format: json
-
 - name: "Add resources"
   uri:
     method: PUT
