@@ -1,5 +1,14 @@
 ---
 
+- include_role:
+    name: phenixid.pas.pas_ca
+
+- include_role:
+    name: phenixid.pas.pas_sp
+
+- include_role:
+    name: phenixid.pas.pas_http
+
 - name: "Create certificate directory"
   file:
     path: "{{ pas_fedsign_jwt_certificate.remote_path }}"
