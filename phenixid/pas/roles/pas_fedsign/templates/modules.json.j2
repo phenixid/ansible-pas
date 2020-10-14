@@ -5,8 +5,8 @@
     "id": "d0e438ab-f08b-4cf8-9096-9898e32c41d0",
     "config": {
       "root_uri": "/config",
-      "allowedLogoutTarget": "{{ pas_federated_signing_allowed_logout_target }}",
-      "http_configuration_ref" : "{{ pas_federated_signing_public_http }}"
+      "allowedLogoutTarget": "{{ pas_fedsign_allowed_logout_target }}",
+      "http_configuration_ref" : "{{ pas_fedsign_public_http }}"
     }
   },
   {
@@ -15,7 +15,7 @@
     "id": "83681020-3532-4247-9fab-b33a9751aa43",
     "config": {
       "root_uri": "/config",
-      "http_configuration_ref" : "{{ pas_federated_signing_private_http }}"
+      "http_configuration_ref" : "{{ pas_fedsign_private_http }}"
     }
   },
   {
@@ -24,9 +24,9 @@
     "enabled": "true",
     "config": {
       "base_url": "/pdf_sign",
-      "auth_redirect_url": "{{ pas_federated_signing_authenticator_url }}",
+      "auth_redirect_url": "{{ pas_fedsign_authenticator_url }}",
       "module_refs": "pdf_sign_prism_01",
-      "http_configuration_ref": "{{ pas_federated_signing_public_http }}"
+      "http_configuration_ref": "{{ pas_fedsign_public_http }}"
     }
   },
   {
@@ -39,7 +39,7 @@
       "base_uri": "sign",
       "sign_auth_redirect_url": "{{ sp_acs_url }}",
       "sign_pipe": "pdf_sign_sign_pipe_01",
-      "http_configuration_ref" : "{{ pas_federated_signing_public_http }}"
+      "http_configuration_ref" : "{{ pas_fedsign_public_http }}"
     }
   },
   {
@@ -52,7 +52,7 @@
       "auth_method": "pipe",
       "auth_pipe": "files_auth_01",
       "store_impl": "com.phenixidentity.files.internal.SessionFilesStore",
-      "http_configuration_ref" : "{{ pas_federated_signing_private_http }}"
+      "http_configuration_ref" : "{{ pas_fedsign_private_http }}"
     }
   }
 ]
