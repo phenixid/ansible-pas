@@ -1,6 +1,6 @@
 ---
 
-pas_pipes_http_enabled: true
+pas_pipes_http_enabled: "true"
 pas_fedsign_public_http: "5efdd8a7-f12b-4c93-9857-0b74bf98e888"
 pas_fedsign_private_http: "httpPrivate"
 pas_pipes_http_configuration_ref: "{{ pas_fedsign_private_http }}"
