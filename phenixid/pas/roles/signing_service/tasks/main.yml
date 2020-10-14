@@ -36,3 +36,10 @@
     name: pas
   become: yes
   when: restart|default(False) == True
+
+- name: "Trigger STORE_UPDATED event"
+  uri:
+    method: POST
+    url: "{{ pas_config_api_url }}/state"
+    body_format: json
+  delegate_to: 127.0.0.1
