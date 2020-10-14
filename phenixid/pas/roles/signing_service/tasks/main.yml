@@ -15,6 +15,15 @@
     name: pas
   become: yes
 
+- name: "Waiting for config API to become available..."
+  wait_for:
+    host: "{{ pas_config_api_host }}"
+    port: "{{ pas_config_api_port }}"
+  delegate_to: 127.0.0.1
+
+- include_role:
+    name: phenixid.pas.pas_fedsign
+
 - include_role:
     name: phenixid.pas.pas_ca
 
@@ -23,6 +32,3 @@
 
 - include_role:
     name: phenixid.pas.pas_http
-
-- include_role:
-    name: phenixid.pas.pas_fedsign
