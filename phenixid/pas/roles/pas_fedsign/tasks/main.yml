@@ -2,7 +2,7 @@
 
 - name: "Create certificate directory"
   file:
-    path: "{{ jwt_certificate.remote_path }}"
+    path: "{{ pas_fedsign_jwt_certificate.remote_path }}"
     state: directory
     owner: "{{ user }}"
     group: "{{ group }}"
@@ -11,8 +11,8 @@
 
 - name: "Add certificate for jwt validation"
   copy:
-    src: "{{ jwt_certificate.local_path }}"
-    dest: "{{ jwt_certificate.remote_path }}/{{ jwt_certificate.local_path | basename }}"
+    src: "{{ pas_fedsign_jwt_certificate.local_path }}"
+    dest: "{{ pas_fedsign_jwt_certificate.remote_path }}/{{ pas_fedsign_jwt_certificate.local_path | basename }}"
     owner: "{{ user }}"
     group: "{{ group }}"
     mode: 0400

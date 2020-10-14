@@ -27,7 +27,7 @@
           "dest_id": "{{ '{{request.session_id}}' }}"
         }
       },
-      {% for property in subject_key_properties %}
+      {% for property in pas_fedsign_subject_key_properties %}
       {
         "name": "PropertyFromSessionToItem",
         "config": {
@@ -63,7 +63,7 @@
         "name": "CreateShortTermKeyStoreValve",
         "enabled": "true",
         "config": {
-          "subjectKeyParamater": "{{ subject_key_parameter }}",
+          "subjectKeyParamater": "{{ pas_fedsign_subject_key_parameter }}",
           "caTemplateKeyParamater": "9942f37c-fb6f-4afd-b35e-e53d672d3d3b",
           "keyUsage": [
             "true",
@@ -149,7 +149,7 @@
         "enabled": "true",
         "config": {
           "access_token": "access_token",
-          "certfilepath": "{{ jwt_certificate.remote_path }}/{{ jwt_certificate.local_path | basename }}",
+          "certfilepath": "{{ pas_fedsign_jwt_certificate.remote_path }}/{{ pas_fedsign_jwt_certificate.local_path | basename }}",
           "additional_attributes": [
             "id",
             "failURL",
