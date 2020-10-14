@@ -1,0 +1,28 @@
+---
+
+- include_role:
+    name: phenixid.util.systemd
+  vars:
+    service_name: pas
+
+- include_role:
+    name: phenixid.pas.pas
+
+- name: "Start service"
+  systemd:
+    state: started
+    daemon_reload: yes
+    name: pas
+  become: yes
+
+- include_role:
+    name: phenixid.pas.pas_ca
+
+- include_role:
+    name: phenixid.pas.pas_sp
+
+- include_role:
+    name: phenixid.pas.pas_http
+
+- include_role:
+    name: phenixid.pas.pas_fedsign

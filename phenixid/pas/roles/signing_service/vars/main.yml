@@ -1,0 +1,16 @@
+---
+
+pas_pipes_http_enabled: true
+pas_fedsign_public_http: "5efdd8a7-f12b-4c93-9857-0b74bf98e888"
+pas_fedsign_private_http: "httpPrivate"
+pas_pipes_http_configuration_ref: "{{ pas_fedsign_private_http }}"
+pas_sp_public_http: "{{ pas_fedsign_public_http }}"
+pas_http_servers:
+  - id: "{{ pas_fedsign_public_http }}"
+    name: "Public HTTP Server"
+    port: "{{ signing_service_public_port }}"
+    ssl: "false"
+  - id: "{{ pas_fedsign_private_http }}"
+    name: "Private HTTP Server"
+    port: "{{ signing_service_private_port }}"
+    ssl: "false"
