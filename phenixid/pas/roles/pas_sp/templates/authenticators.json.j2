@@ -1,16 +1,16 @@
 [
   {
     "id": "baaf7cf1-255b-44ac-96f0-7d14ab38a95f",
-    "alias": "{{ sp_authenticator_alias }}",
+    "alias": "{{ pas_sp_authenticator_alias }}",
     "name": "SAMLServiceProviderAuthN",
     "displayName": "External IdP",
     "configuration": {
-      "targetIDP": "{{ idp_id }}",
-      "sp": "{{ sp_id }}",
-      "entityID": "{{ sp_id }}",
-      "acsUrl": "{{ sp_acs_url }}",
-      "pipeID": "{{ sp_acs_pipe_id }}",
-      "successURL": "{{ sp_success_url }}"
+      "targetIDP": "{{ pas_sp_idp_id }}",
+      "sp": "{{ pas_sp_sp_id }}",
+      "entityID": "{{ pas_sp_sp_id }}",
+      "acsUrl": "{{ pas_sp_acs_url }}",
+      "pipeID": "{{ pas_sp_acs_pipe_id }}",
+      "successURL": "{{ pas_sp_success_url }}"
     }
   }
 ]
