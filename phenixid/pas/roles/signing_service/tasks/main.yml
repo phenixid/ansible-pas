@@ -4,9 +4,11 @@
     name: phenixid.util.systemd
   vars:
     service_name: pas
+  when: skip_install|default(False) == False
 
 - include_role:
     name: phenixid.pas.pas
+  when: skip_install|default(False) == False
 
 - name: "Start service"
   systemd:
@@ -14,12 +16,15 @@
     daemon_reload: yes
     name: pas
   become: yes
+  when: skip_install|default(False) == False
 
 - name: "Waiting for config API to become available..."
   wait_for:
     host: "{{ pas_config_api_host }}"
     port: "{{ pas_config_api_port }}"
   delegate_to: 127.0.0.1
+  when: skip_configure|default(False) == False
 
 - include_role:
     name: phenixid.pas.pas_fedsign
+  when: skip_configure|default(False) == False
