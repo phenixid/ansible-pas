@@ -23,12 +23,3 @@
 
 - include_role:
     name: phenixid.pas.pas_fedsign
-
-- include_role:
-    name: phenixid.pas.pas_ca
-
-- include_role:
-    name: phenixid.pas.pas_sp
-
-- include_role:
-    name: phenixid.pas.pas_http
