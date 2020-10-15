@@ -1,0 +1,36 @@
+[
+  {
+    "id": "SignProfile",
+    "name": "Testmiljö",
+    "alias": "default",
+    "description": "Profile for client certificates",
+    "pipe_ref": "0bd49bcc-fba4-48d2-9fe7-6a8d1270b94c",
+    "issue_pipe_ref": "0bd49bcc-fba4-48d2-9fe7-6a8d1270b94c",
+    "revoke_pipe_ref": "bac3f3e9-6d47-499b-9b91-33039f570fca",
+    "rules": {
+      "subject": {
+        "regex": "^CN=.*",
+        "required": "true"
+      },
+      "key": {
+        "size": "2048",
+        "algorithm": "RSA",
+        "values": {
+          "size": "2048",
+          "algorithm": "RSA"
+        }
+      },
+      "key_usage": {},
+      "not_before": {
+        "value": "now"
+      },
+      "not_after": {
+        "value": "duration:P365D"
+      },
+      "extensions": {},
+      "signature_algorithm": {
+        "value": "SHA256WithRSA"
+      }
+    }
+  }
+]

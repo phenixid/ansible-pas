@@ -1,7 +1,0 @@
-[sign]
-172.31.9.212
-172.31.9.144
-
-[all:vars]
-ansible_python_interpreter=/usr/bin/python3
-signing_public_url=http://signing.example.org:80
