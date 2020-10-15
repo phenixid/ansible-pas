@@ -23,7 +23,7 @@ pas_sp_idp_metadata: "idp.xml"
 pas_sp_sp_metadata: "sp.sign.xml"
 pas_sp_idp_id: "idp.phenixid.se"
 pas_sp_sp_id: "spsign.dev.digo"
-pas_allowed_logout_target: ".*localhost.*|.*127.0.0.1.*|.*{{ digo_service_host }}:80.*"
+pas_allowed_logout_target: ".*localhost.*|.*127.0.0.1.*|.*{{ digo_service_host }}:80.*|.*{{ signing_public_host }}:80.*"
 pas_fedsign_jwt_certificate: { local_path: "jwt.crt", remote_path: "/opt/phenixid/certs" }
 pas_ca_keystore: "ca.p12"
 pas_ca_keystore_password: "cCqtZmgH4WTCF2U5"
