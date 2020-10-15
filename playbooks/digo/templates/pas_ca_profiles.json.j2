@@ -4,9 +4,9 @@
     "name": "Testmiljö",
     "alias": "default",
     "description": "Profile for client certificates",
-    "pipe_ref": "0bd49bcc-fba4-48d2-9fe7-6a8d1270b94c",
-    "issue_pipe_ref": "0bd49bcc-fba4-48d2-9fe7-6a8d1270b94c",
-    "revoke_pipe_ref": "bac3f3e9-6d47-499b-9b91-33039f570fca",
+    "pipe_ref": "{{ pas_ca_issuer_pipe_id }}",
+    "issue_pipe_ref": "{{ pas_ca_issuer_pipe_id }}",
+    "revoke_pipe_ref": "{{ pas_ca_revoke_pipe_id }}",
     "rules": {
       "subject": {
         "regex": "^CN=.*",

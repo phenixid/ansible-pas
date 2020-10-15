@@ -1,10 +1,10 @@
 [
   {
-    "id": "9942f37c-fb6f-4afd-b35e-e53d672d3d3b",
+    "id": "{{ pas_ca_ca_id }}",
     "name": "My CA",
-    "alias": "ca",
+    "alias": "{{ pas_ca_ca_id }}",
     "config": {
-      "ca_keystore_ref": "c8e4f75a-65c6-462e-afdf-134ce8a45883",
+      "ca_keystore_ref": "{{ pas_ca_keystore_id }}",
       "ca_profiles": {{ lookup('template', 'pas_ca_profiles.json.j2') }}
     }
   }

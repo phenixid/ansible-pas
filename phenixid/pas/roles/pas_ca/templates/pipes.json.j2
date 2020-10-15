@@ -1,6 +1,6 @@
 [
   {
-    "id": "0bd49bcc-fba4-48d2-9fe7-6a8d1270b94c",
+    "id": "{{ pas_ca_issuer_pipe_id }}",
     "valves": [
       {
         "name": "ItemCreateValve",
@@ -20,13 +20,13 @@
           "cert_key_usage": "{{ '{{request.key_usage}}' }}",
           "cert_ext_key_usage": "{{ '{{request.ext_key_usage}}' }}",
           "cert_ocsp_url": "{{ '{{request.ocsp_url}}' }}",
-          "ca_ref": "9942f37c-fb6f-4afd-b35e-e53d672d3d3b"
+          "ca_ref": "{{ pas_ca_ca_id }}"
         }
       }
     ]
   },
   {
-    "id": "bac3f3e9-6d47-499b-9b91-33039f570fca",
+    "id": "{{ pas_ca_revoke_pipe_id }}",
     "config": {
       "valve_refs": ""
     }
