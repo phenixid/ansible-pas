@@ -29,14 +29,6 @@
     name: phenixid.pas.pas_fedsign
   when: skip_configure|default(False) == False
 
-- name: "Restart service"
-  systemd:
-    state: restarted
-    daemon_reload: yes
-    name: pas
-  become: yes
-  when: restart|default(False) == True
-
 - name: "Trigger STORE_UPDATED event"
   uri:
     method: POST
