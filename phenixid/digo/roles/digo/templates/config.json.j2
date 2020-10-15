@@ -26,7 +26,7 @@
     "publicKeyFile": "{{ digo_jwt_public_key.remote_path }}/{{ digo_jwt_public_key.local_path | basename }}"
   },
   "signingService": {
-    "url": "{{ signing_service_url }}/"
+    "url": "{{ signing_service_url }}/authenticate/logout/?nextTarget={{ signing_service_url }}/"
   },
   "fileService": {
     "url": "{{ file_service_url }}",

@@ -53,6 +53,14 @@
         "api_host": "{{ pas_config_api_host }}",
         "api_port": "{{ pas_config_api_port }}"
       }
+    },
+    {
+      "name": "com.phenixidentity~auth-http",
+      "enabled": "true",
+      "config": {
+        "root_uri": "/config",
+        "allowedLogoutTarget": "{{ pas_allowed_logout_target }}"
+      }
     }
   ]
 }
