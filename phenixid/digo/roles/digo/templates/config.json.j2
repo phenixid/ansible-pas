@@ -19,7 +19,7 @@
       "batchInterval": 10000,
       "batchSize": 1000
     },
-    "fileDirectory": "files"
+    "fileDirectory": "{{ digo_file_directory }}"
   },
   "jwt": {
     "privateKeyFile": "{{ digo_jwt_private_key.remote_path }}/{{ digo_jwt_private_key.local_path | basename }}",
@@ -59,7 +59,8 @@
     "username": "{{ digo_smtp_username }}",
     "password": "{{ digo_smtp_password}}",
     "fromAddress": "{{ digo_smtp_from }}",
-    "enabled": "{{ digo_smtp_enabled }}"
+    "enabled": "{{ digo_smtp_enabled | string | lower }}",
+    "auth": {{ digo_smtp_auth_enabled | bool | lower }}
   },
   "externalUsers": {
     "citizensUrl": "{{ citizens_query_url }}",
