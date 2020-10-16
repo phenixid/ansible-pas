@@ -1,6 +1,9 @@
 ---
 
 - include_role:
+    name: phenixid.pas.pas_keystore
+
+- include_role:
     name: phenixid.pas.pas_ca
 
 - include_role:

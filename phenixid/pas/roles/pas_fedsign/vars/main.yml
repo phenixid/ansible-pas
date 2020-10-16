@@ -1,1 +1,9 @@
 ---
+
+pas_fedsign_authenticator_url: "{{ pas_fedsign_service_url }}/authenticate/{{ pas_fedsign_authenticator_alias }}"
+pas_fedsign_ca_id: "{{ pas_ca_ca_id }}"
+
+pas_sp_acs_url: "{{ pas_fedsign_service_url }}/authenticate/{{ pas_sp_authenticator_alias }}"
+pas_sp_success_url: "{{ pas_fedsign_service_url }}/sign/api/sign"
+
+pas_ca_keystore_id: "{{ pas_keystore_id }}"

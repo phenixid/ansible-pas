@@ -1,11 +1,11 @@
 [
   {
     "id": "{{ pas_ca_ca_id }}",
-    "name": "My CA",
-    "alias": "{{ pas_ca_ca_id }}",
+    "alias": "{{ pas_ca_ca_alias }}",
+    "name": "{{ pas_ca_ca_name }}",
     "config": {
       "ca_keystore_ref": "{{ pas_ca_keystore_id }}",
-      "ca_profiles": {{ lookup('template', 'pas_ca_profiles.json.j2') }}
+      "ca_profiles": {{ lookup('template', pas_ca_profiles) }}
     }
   }
 ]

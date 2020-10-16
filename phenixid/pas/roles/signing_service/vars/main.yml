@@ -1,16 +1,23 @@
 ---
 
-pas_pipes_http_enabled: "true"
-pas_fedsign_public_http: "5efdd8a7-f12b-4c93-9857-0b74bf98e888"
-pas_fedsign_private_http: "httpPrivate"
-pas_pipes_http_configuration_ref: "{{ pas_fedsign_private_http }}"
-pas_sp_public_http: "{{ pas_fedsign_public_http }}"
+pas_fedsign_service_url: "{{ signing_service_url }}"
+
 pas_http_servers:
-  - id: "{{ pas_fedsign_public_http }}"
+  - id: "5efdd8a7-f12b-4c93-9857-0b74bf98e888"
     name: "Public HTTP Server"
     port: "{{ signing_service_public_port }}"
     ssl: "false"
-  - id: "{{ pas_fedsign_private_http }}"
+  - id: "49b1d005-ac1a-4a32-ab19-e5bd39ff0b36"
     name: "Private HTTP Server"
     port: "{{ signing_service_private_port }}"
     ssl: "false"
+
+pas_fedsign_public_http: "{{ pas_http_servers[0].id }}"
+pas_fedsign_private_http: "{{ pas_http_servers[1].id }}"
+pas_sp_public_http: "{{ pas_http_servers[0].id }}"
+pas_pipes_http_configuration_ref: "{{ pas_http_servers[1].id }}"
+pas_pipes_http_enabled: "true"
+
+pas_fedsign_subject_key_properties: "{{ signing_service_subject_key_properties }}"
+pas_fedsign_subject_key: "{{ signing_service_subject_key }}"
+pas_ca_profiles: "{{ signing_service_ca_profiles }}"

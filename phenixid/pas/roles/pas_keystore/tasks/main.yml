@@ -1,0 +1,16 @@
+---
+# tasks file for pas_keystore
+
+- name: "Add resources"
+  uri:
+    method: PUT
+    url: "{{ pas_config_api_url }}/config/resources"
+    body: "{{ lookup('template', 'resources.json.j2') }}"
+    body_format: json
+
+- name: "Add keystores"
+  uri:
+    method: PUT
+    url: "{{ pas_config_api_url }}/config/keystores"
+    body: "{{ lookup('template', 'keystores.json.j2') }}"
+    body_format: json
