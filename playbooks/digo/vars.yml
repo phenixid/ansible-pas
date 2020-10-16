@@ -28,7 +28,7 @@ pas_fedsign_jwt_certificate: { local_path: "jwt.crt", remote_path: "/opt/phenixi
 pas_ca_keystore: "ca.p12"
 pas_ca_keystore_password: "cCqtZmgH4WTCF2U5"
 pas_fedsign_subject_key_properties: ["cn", "sn", "mail"]
-pas_fedsign_subject_key_parameter: "CN={{ '{{item.cn}}' }} {{ '{{item.sn}}' }} ({{ '{{item.mail}}' }}),dc=ad,dc=example,dc=org"
+pas_fedsign_subject_key: "CN={{ '{{item.cn}}' }} {{ '{{item.sn}}' }} ({{ '{{item.mail}}' }}),dc=ad,dc=example,dc=org"
 
 signing_service_public_port: "8080"
 signing_service_private_port: "8444"
