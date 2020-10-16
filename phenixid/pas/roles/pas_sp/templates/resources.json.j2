@@ -1,11 +1,5 @@
 [
   {
-    "id": "{{ pas_sp_sp_metadata_resource_id }}",
-    "content_type": "application/xml",
-    "content_encoding": "base64",
-    "content": "{{ lookup('file', pas_sp_sp_metadata) | b64encode }}"
-  },
-  {
     "id": "{{ pas_sp_idp_metadata_resource_id }}",
     "content_type": "application/xml",
     "content_encoding": "base64",
