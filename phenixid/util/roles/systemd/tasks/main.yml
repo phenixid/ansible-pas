@@ -20,7 +20,7 @@
 
 - name: "Check service {{ service_name }} is installed"
   stat:
-    path: "/lib/systemd/system/{{ service_name }}.service"
+    path: "/etc/systemd/system/{{ service_name }}.service"
   register: service_stat
 
 - name: "Stop service {{ service_name }}"
@@ -30,9 +30,9 @@
   become: yes
   when: service_stat.stat.exists
 
-- name: "Install service file /lib/systemd/system/{{ service_name }}.service"
+- name: "Install service file /etc/systemd/system/{{ service_name }}.service"
   template:
     src: "{{ service_name }}.service.j2"
-    dest: "/lib/systemd/system/{{ service_name }}.service"
+    dest: "/etc/systemd/system/{{ service_name }}.service"
     mode: 0644
   become: yes
