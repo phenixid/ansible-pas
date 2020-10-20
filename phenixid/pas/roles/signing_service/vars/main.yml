@@ -20,4 +20,13 @@ pas_pipes_http_enabled: "true"
 
 pas_fedsign_subject_key_properties: "{{ signing_service_subject_key_properties }}"
 pas_fedsign_subject_key: "{{ signing_service_subject_key }}"
+pas_fedsign_jwt_certificate: "{{ signing_service_jwt_certificate }}"
 pas_ca_profiles: "{{ signing_service_ca_profiles }}"
+
+pas_keystore: "{{ signing_service_ca_keystore }}"
+pas_keystore_password: "{{ signing_service_ca_keystore_password }}"
+pas_sp_sp_id: "{{ signing_service_sp_id }}"
+pas_sp_idp_id: "{{ signing_service_idp_id }}"
+pas_sp_idp_metadata: "{{ signing_service_idp_metadata }}"
+
+pas_allowed_logout_target: ".*localhost.*|.*127.0.0.1.*|.*{{ digo_service_host }}:80.*|.*{{ signing_service_host }}:80.*"
