@@ -29,4 +29,4 @@ pas_sp_sp_id: "{{ signing_service_sp_id }}"
 pas_sp_idp_id: "{{ signing_service_idp_id }}"
 pas_sp_idp_metadata: "{{ signing_service_idp_metadata }}"
 
-pas_allowed_logout_target: ".*localhost.*|.*127.0.0.1.*|.*{{ digo_service_host }}:80.*|.*{{ signing_service_host }}:80.*"
+pas_allowed_logout_target: ".*{{ signing_service_client_url }}.*|.*{{ signing_service_url }}.*"
