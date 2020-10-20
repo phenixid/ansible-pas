@@ -9,7 +9,7 @@
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
 
-signing_public_host=signing.example.org
+signing_service_host=signing.example.org
 digo_service_host=digo.example.org
 file_service_host=internal-file-service-123456789012.eu-central-1.elb.amazonaws.com
 user_service_host=172.31.24.112
