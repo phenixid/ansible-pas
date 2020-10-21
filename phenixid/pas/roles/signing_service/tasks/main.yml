@@ -22,7 +22,6 @@
   wait_for:
     host: "{{ pas_config_api_host }}"
     port: "{{ pas_config_api_port }}"
-  delegate_to: 127.0.0.1
   when: skip_configure|default(False) == False
 
 - include_role:
@@ -34,4 +33,3 @@
     method: POST
     url: "{{ pas_config_api_url }}/state"
     body_format: json
-  delegate_to: 127.0.0.1
