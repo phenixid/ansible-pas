@@ -39,11 +39,11 @@
     "issuerId": "{{ digo_sp_id }}",
     "defaultLocale": "sv",
     "attributes": {
-      "authority": "description",
-      "source": "source",
-      "firstName": "cn",
-      "lastName": "sn",
-      "mail": "mail"
+      "authority": "{{ digo_saml_authority }}",
+      "source": "{{ digo_saml_source }}",
+      "firstName": "{{ digo_saml_first_name }}",
+      "lastName": "{{ digo_saml_last_name }}",
+      "mail": "{{ digo_saml_mail }}"
     },
     "trustedIssuers": [
       "{{ digo_saml_idp_id }}"
