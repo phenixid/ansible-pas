@@ -26,6 +26,7 @@ signing_service_sp_id: "spsign.dev.digo"
 signing_service_jwt_certificate: { local_path: "/path/to/jwt.crt", remote_path: "/opt/phenixid/certs" }
 signing_service_ca_keystore: "/path/to/ca.p12"
 signing_service_ca_keystore_password: "cCqtZmgH4WTCF2U5"
+signing_service_ca_keystore_alias: "0"
 signing_service_subject_key_properties: ["cn", "sn", "mail"]
 signing_service_subject_key: "CN={{ '{{item.cn}}' }} {{ '{{item.sn}}' }} ({{ '{{item.mail}}' }}),dc=ad,dc=example,dc=org"
 
