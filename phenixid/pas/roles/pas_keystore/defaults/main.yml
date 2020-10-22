@@ -3,4 +3,3 @@
 
 pas_keystore_type: "pkcs12"
 pas_keystore_content_type: "application/x-pkcs12"
-pas_keystore_alias: "0"

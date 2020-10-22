@@ -7,8 +7,9 @@
         "scope": "global",
         "singleton": "true",
         "config": {
-          "http_enabled": "{{ pas_pipes_http_enabled }}",
-          "http_configuration_ref": "{{ pas_pipes_http_configuration_ref }}"
+          "http_enabled": "{{ pas_pipes_http_enabled | string | lower }}",
+          "http_configuration_ref": "{{ pas_pipes_http_configuration_ref }}",
+          "port": "{{ pas_pipes_http_port | string }}"
         }
       },
       {
@@ -30,7 +31,9 @@
         "scope": "global",
         "singleton": "true",
         "config": {
-          "enableHttp": "false"
+          "enableHttp": "{{ pas_ca_http_enabled | string | lower }}",
+          "http_configuration_ref": "{{ pas_ca_http_configuration_ref }}",
+          "port": "{{ pas_ca_http_port | string }}"
         }
       }
     ]
@@ -59,8 +62,10 @@
       "name": "com.phenixidentity~auth-http",
       "enabled": "true",
       "config": {
-        "root_uri": "/config",
-        "allowedLogoutTarget": "{{ pas_allowed_logout_target }}"
+        "root_uri": "{{ pas_http_root_uri }}",
+        "allowedLogoutTarget": "{{ pas_http_allowed_logout_target }}",
+        "port": "{{ pas_http_default_port | string }}",
+        "ssl": "{{ pas_http_use_ssl }}"
       }
     }
   ]
