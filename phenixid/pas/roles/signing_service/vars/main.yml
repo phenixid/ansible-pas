@@ -28,5 +28,6 @@ pas_keystore_password: "{{ signing_service_ca_keystore_password }}"
 pas_sp_sp_id: "{{ signing_service_sp_id }}"
 pas_sp_idp_id: "{{ signing_service_idp_id }}"
 pas_sp_idp_metadata: "{{ signing_service_idp_metadata }}"
+pas_sp_force_authn: "{{ signing_service_sp_force_authn }}"
 
 pas_allowed_logout_target: ".*{{ signing_service_client_url }}.*|.*{{ signing_service_url }}.*"

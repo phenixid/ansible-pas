@@ -1,2 +1,4 @@
 ---
 # defaults file for signing_service
+
+signing_service_sp_force_authn: yes
