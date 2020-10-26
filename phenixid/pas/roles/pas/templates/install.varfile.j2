@@ -1,11 +1,11 @@
 adminpassword={{ pas_admin_password }}
 adminpassword2={{ pas_admin_password }}
-mplEncryptionkey={{ db_encryption_key }}
-mplClientPassword={{ db_client_password }}
-adminuser={{ adminuser | default('phenixid') }}
-httpPort$Long={{ http_port | default(8443) }}
+mplEncryptionkey={{ pas_db_encryption_key }}
+mplClientPassword={{ pas_db_client_password }}
+adminuser={{ pas_admin_user }}
+httpPort$Long={{ pas_default_http_port }}
 isCluster$Boolean=false
-isVirtual$Boolean={{ is_virtual | default(true) }}
+isVirtual$Boolean={{ pas_is_virtual | string | lower }}
 licFile=
 sys.adminRights$Boolean=true
 sys.installationDir={{ pas_home }}

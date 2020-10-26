@@ -9,6 +9,7 @@ pas_installer: {  type: "installer", local_path: "/path/to/phxid_server_linux_x6
 pas_license_file: "/path/to/license.p12"
 pas_start_script: "start-PhenixID.sh"
 pas_enc_key: "<secret>"
+pas_admin_user: "phxid"
 pas_admin_password: "<secret>"
 pas_license_password: "<secret>"
 pas_session_cluster_password: "<secret>"
@@ -40,7 +41,8 @@ digo_install_directory: "/opt/phenixid"
 digo_installer: {  type: "installer", local_path: "/path/to/digo-phenixid-0.59-lib.tar.gz", remote_path: "/home/{{ user }}" }
 digo_public_port: 8080
 
-digo_file_directory: "/opt/files"
+digo_file_location_id: 1
+digo_file_location_path: "/opt/files"
 
 digo_smtp_host: "smtp.sendgrid.net"
 digo_smtp_port: "587"
@@ -51,8 +53,8 @@ digo_smtp_username: "apikey"
 digo_smtp_password: "<token>"
 digo_smtp_auth_enabled: false
 
-db_user: "sa"
-db_password: "<secret>"
+digo_db_user: "sa"
+digo_db_password: "<secret>"
 
 file_service_username: "phenixid"
 file_service_password: "<secret>"

@@ -2,9 +2,9 @@
   "publicUrl": "{{ digo_service_url }}",
   "primaryServerPort": {{ digo_public_port }},
   "database": {
-    "url": "{{ db_url }}",
-    "user": "{{ db_user }}",
-    "password": "{{ db_password }}",
+    "url": "{{ digo_db_url }}",
+    "user": "{{ digo_db_user }}",
+    "password": "{{ digo_db_password }}",
     "maxPoolSize": "5",
     "changelog": "db_migrations/changelog.master.xml",
     "migrations_enabled": true,
@@ -19,19 +19,20 @@
       "batchInterval": 10000,
       "batchSize": 1000
     },
-    "fileDirectory": "{{ digo_file_directory }}"
+    "fileDirectory": "{{ digo_file_location_path }}",
+    "documentLocationId": {{ digo_file_location_id }}
   },
   "jwt": {
     "privateKeyFile": "{{ digo_jwt_private_key.remote_path }}/{{ digo_jwt_private_key.local_path | basename }}",
     "publicKeyFile": "{{ digo_jwt_public_key.remote_path }}/{{ digo_jwt_public_key.local_path | basename }}"
   },
   "signingService": {
-    "url": "{{ signing_service_url }}/authenticate/logout/?nextTarget={{ signing_service_url }}/"
+    "url": "{{ digo_signing_service_url }}/authenticate/logout/?nextTarget={{ digo_signing_service_url }}/"
   },
   "fileService": {
-    "url": "{{ file_service_url }}",
-    "username": "{{ file_service_username }}",
-    "password": "{{ file_service_password }}"
+    "url": "{{ digo_file_service_url }}",
+    "username": "{{ digo_file_service_username }}",
+    "password": "{{ digo_file_service_password }}"
   },
   "saml": {
     "postSsoUrl": "{{ idp_sso_url }}",
