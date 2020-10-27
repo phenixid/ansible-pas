@@ -56,9 +56,6 @@ digo_smtp_auth_enabled: false
 digo_db_user: "sa"
 digo_db_password: "<secret>"
 
-file_service_username: "phenixid"
-file_service_password: "<secret>"
-
 digo_sp_id: "spauthn.dev.digo"
 digo_saml_trust: { local_path: "digo-saml-trust.pem", remote_path: "/opt/phenixid/certs"}
 digo_jwt_private_key: { local_path: "key.der", remote_path: "/opt/phenixid/certs" }
