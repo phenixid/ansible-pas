@@ -61,6 +61,13 @@ digo_saml_trust: { local_path: "digo-saml-trust.pem", remote_path: "/opt/phenixi
 digo_jwt_private_key: { local_path: "key.der", remote_path: "/opt/phenixid/certs" }
 digo_jwt_public_key: { local_path: "public-key.der", remote_path: "/opt/phenixid/certs" }
 
+digo_user_service_ssl: yes
+digo_user_service_ssl_client: yes
+digo_user_service_ssl_trust_all: no
+digo_user_service_ssl_trust: "/path/to/trust/file.pem"
+digo_user_service_ssl_key: "/path/to/client/key.p12"
+digo_user_service_ssl_key_pass: "<password>"
+
 digo_saml_idp_id: "{{ pas_sp_idp_id }}"
 digo_saml_authority: "description"
 digo_saml_source: "source"
