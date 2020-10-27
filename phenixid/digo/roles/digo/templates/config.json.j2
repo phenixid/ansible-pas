@@ -63,6 +63,12 @@
     "auth": {{ digo_smtp_auth_enabled | bool | lower }}
   },
   "externalUsers": {
+    "useSsl": {{ digo_user_service_ssl | bool | lower }},
+    "useSslClientCert": {{ digo_user_service_ssl_client | bool | lower }},
+    "useSslTrustAll": {{ digo_user_service_ssl_trust_all | bool | lower }},
+    "sslTrustFile": "{{ digo_user_service_ssl_trust }}",
+    "sslKeyFile": "{{ digo_user_service_ssl_key }}",
+    "sslKeyPassword": "{{ digo_user_service_ssl_key_pass }}",
     "citizensUrl": "{{ citizens_query_url }}",
     "employeesUrl": "{{ employees_query_url }}",
     "fobUrl": "{{ fob_query_url }}",
