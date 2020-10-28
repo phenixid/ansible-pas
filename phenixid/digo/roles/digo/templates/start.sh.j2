@@ -7,5 +7,6 @@ nohup java \
   -Dlog4j.configurationFile=config/log4j2.xml \
   -Djava.util.logging.config.file=config/logging.properties \
   -Dvertx.hazelcast.config=config/hazelcast.xml \
+  {{ digo_custom_java_opts }} \
   -cp "lib/*" \
   com.phenixidentity.digo.sthlm.MainVerticle config/config.json 2>&1 &
