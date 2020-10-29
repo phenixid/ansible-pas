@@ -1,22 +1,14 @@
 ---
 
+- include_role:
+    name: phenixid.pas.pas_keystore
+
+- include_role:
+    name: phenixid.pas.pas_ca
+
 - name: "Add samlidp"
   uri:
     method: PUT
     url: "{{ pas_config_api_url }}/config/samlidp"
     body: "{{ lookup('template', 'samlidp.json.j2') }}"
-    body_format: json
-
-- name: "Add samlmeta"
-  uri:
-    method: PUT
-    url: "{{ pas_config_api_url }}/config/samlmeta"
-    body: "{{ lookup('template', 'samlmeta.json.j2') }}"
-    body_format: json
-
-- name: "Add resources"
-  uri:
-    method: PUT
-    url: "{{ pas_config_api_url }}/config/resources"
-    body: "{{ lookup('template', 'resources.json.j2') }}"
     body_format: json
