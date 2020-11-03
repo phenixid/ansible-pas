@@ -21,7 +21,33 @@
   become_user: "{{ user }}"
   become: yes
 
-- name: "Add keys"
+- set_fact:
+    ssl_trust_file: "{{ digo_user_service_ssl_trust.remote_path }}/{{ digo_user_service_ssl_trust.local_path | basename }}"
+  when: digo_user_service_ssl_trust is not undefined
+
+- name: "Add TLS trust"
+  copy:
+    src: "{{ digo_user_service_ssl_trust.local_path }}"
+    dest: "{{ ssl_trust_file }}"
+    mode: 0400
+    owner: "{{ user }}"
+  become: yes
+  when: digo_user_service_ssl_trust is not undefined
+
+- set_fact:
+    ssl_key_file: "{{ digo_user_service_ssl_key.remote_path }}/{{ digo_user_service_ssl_key.local_path | basename }}"
+  when: digo_user_service_ssl_key is not undefined
+
+- name: "Add TLS key"
+  copy:
+    src: "{{ digo_user_service_ssl_key.local_path }}"
+    dest: "{{ ssl_key_file }}"
+    mode: 0400
+    owner: "{{ user }}"
+  become: yes
+  when: digo_user_service_ssl_key is not undefined
+
+- name: "Add keys and SAML trust"
   copy:
     src: "{{ item.local_path }}"
     dest: "{{ item.remote_path }}/{{ item.local_path | basename }}"

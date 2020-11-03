@@ -4,7 +4,5 @@
 digo_user_service_ssl: no
 digo_user_service_ssl_client: no
 digo_user_service_ssl_trust_all: no
-digo_user_service_ssl_trust: ""
-digo_user_service_ssl_key: ""
 digo_user_service_ssl_key_pass: ""
 digo_custom_java_opts: ""

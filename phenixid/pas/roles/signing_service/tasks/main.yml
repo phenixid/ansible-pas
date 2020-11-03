@@ -33,3 +33,4 @@
     method: POST
     url: "{{ pas_config_api_url }}/state"
     body_format: json
+  when: skip_configure|default(False) == False
