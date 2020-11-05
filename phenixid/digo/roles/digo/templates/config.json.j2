@@ -23,8 +23,8 @@
     "documentLocationId": {{ digo_file_location_id }}
   },
   "jwt": {
-    "privateKeyFile": "{{ digo_jwt_private_key.remote_path }}/{{ digo_jwt_private_key.local_path | basename }}",
-    "publicKeyFile": "{{ digo_jwt_public_key.remote_path }}/{{ digo_jwt_public_key.local_path | basename }}"
+    "privateKeyFile": "{{ digo_private_key.remote_path }}/{{ digo_private_key.local_path | basename }}",
+    "publicCertFile": "{{ digo_certificate.remote_path }}/{{ digo_certificate.local_path | basename }}"
   },
   "signingService": {
     "url": "{{ digo_signing_service_url }}/authenticate/logout/?nextTarget={{ digo_signing_service_url }}/"

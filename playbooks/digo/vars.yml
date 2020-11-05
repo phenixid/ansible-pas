@@ -58,8 +58,8 @@ digo_db_password: "<secret>"
 
 digo_sp_id: "spauthn.dev.digo"
 digo_saml_trust: { local_path: "digo-saml-trust.pem", remote_path: "/opt/phenixid/certs"}
-digo_jwt_private_key: { local_path: "key.der", remote_path: "/opt/phenixid/certs" }
-digo_jwt_public_key: { local_path: "public-key.der", remote_path: "/opt/phenixid/certs" }
+digo_private_key: { local_path: "key.der", remote_path: "/opt/phenixid/certs" }
+digo_certificate: { local_path: "cert.pem", remote_path: "/opt/phenixid/certs" }
 
 digo_user_service_ssl: yes
 digo_user_service_ssl_client: yes

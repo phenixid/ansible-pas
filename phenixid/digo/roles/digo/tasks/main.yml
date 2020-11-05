@@ -55,8 +55,8 @@
     owner: "{{ user }}"
   with_items:
     - "{{ digo_saml_trust }}"
-    - "{{ digo_jwt_private_key }}"
-    - "{{ digo_jwt_public_key }}"
+    - "{{ digo_private_key }}"
+    - "{{ digo_certificate }}"
   become: yes
 
 - name: "Add log configuration"
