@@ -24,7 +24,7 @@ signing_service_client_url: "{{ digo_service_url }}"
 signing_service_idp_metadata: "idp.xml"
 signing_service_idp_id: "idp.phenixid.se"
 signing_service_sp_id: "spsign.dev.digo"
-signing_service_jwt_certificate: { local_path: "/path/to/jwt.crt", remote_path: "/opt/phenixid/certs" }
+signing_service_jwt_certificate: { local_path: "/path/to/digo-cert.pem", remote_path: "/opt/phenixid/certs" }
 signing_service_ca_keystore: "/path/to/ca.p12"
 signing_service_ca_keystore_password: "cCqtZmgH4WTCF2U5"
 signing_service_ca_keystore_alias: "0"
@@ -58,8 +58,8 @@ digo_db_password: "<secret>"
 
 digo_sp_id: "spauthn.dev.digo"
 digo_saml_trust: { local_path: "digo-saml-trust.pem", remote_path: "/opt/phenixid/certs"}
-digo_private_key: { local_path: "key.der", remote_path: "/opt/phenixid/certs" }
-digo_certificate: { local_path: "cert.pem", remote_path: "/opt/phenixid/certs" }
+digo_private_key: { local_path: "/path/to/digo-private-key.der", remote_path: "/opt/phenixid/certs" }
+digo_certificate: { local_path: "/path/to/digo-cert.pem", remote_path: "/opt/phenixid/certs" }
 
 digo_user_service_ssl: yes
 digo_user_service_ssl_client: yes
