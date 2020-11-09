@@ -1,12 +1,11 @@
 [
   {
-    "id": "customsignca",
-    "name": "My CA",
-    "alias": "customsignca",
+    "id": "{{ pas_ca_ca_id }}",
+    "alias": "{{ pas_ca_ca_alias }}",
+    "name": "{{ pas_ca_ca_name }}",
     "config": {
-      "ca_keystore_ref": "c8e4f75a-65c6-462e-afdf-134ce8a45883",
-      "ca_profiles": [
-      ]
+      "ca_keystore_ref": "{{ pas_ca_keystore_id }}",
+      "ca_profiles": {{ lookup('template', pas_ca_profiles) }}
     }
   }
 ]

@@ -1,22 +1,15 @@
 ---
 
-- name: "Add resources"
-  uri:
-    method: PUT
-    url: "{{ config_api_url }}/config/resources"
-    body: "{{ lookup('template', 'resources.json.j2') }}"
-    body_format: json
-
-- name: "Add keystores"
-  uri:
-    method: PUT
-    url: "{{ config_api_url }}/config/keystores"
-    body: "{{ lookup('template', 'keystores.json.j2') }}"
-    body_format: json
-
 - name: "Add ca_configurations"
   uri:
     method: PUT
-    url: "{{ config_api_url }}/config/ca_configurations"
+    url: "{{ pas_config_api_url }}/config/ca_configurations"
     body: "{{ lookup('template', 'ca_configurations.json.j2') }}"
+    body_format: json
+
+- name: "Add pipes"
+  uri:
+    method: PUT
+    url: "{{ pas_config_api_url }}/config/pipes"
+    body: "{{ lookup('template', 'pipes.json.j2') }}"
     body_format: json

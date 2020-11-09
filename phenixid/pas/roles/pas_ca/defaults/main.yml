@@ -1,2 +1,4 @@
 ---
 # defaults file for pas_ca
+
+pas_ca_ca_name: "Certificate Authority"

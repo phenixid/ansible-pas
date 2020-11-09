@@ -6,14 +6,14 @@
  
     - `python3` 
    
-   This machine will execute the Ansible playbooks.
+    This machine will execute the Ansible playbooks.
  
  - One or more **target machines** with 
  
     - `python3` 
     - `systemd`
    
-   These machines will be provisioned with a PAS installation and configured for various services. The service will be managed by `systemd`.
+    These machines will be provisioned with a PAS installation and configured for various services. The service will be managed by `systemd`.
  
  - The target machines must allow incoming SSH traffic from the control machine
  

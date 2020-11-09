@@ -1,8 +1,9 @@
 [
   {
-    "id": "{{ sp_id }}",
-    "keystoreSign": "c8e4f75a-65c6-462e-afdf-134ce8a45883",
-    "keystoreEncrypt": "c8e4f75a-65c6-462e-afdf-134ce8a45883",
-    "entityID": "{{ sp_id }}"
+    "id": "{{ pas_sp_sp_id }}",
+    "keystoreSign": "{{ pas_sp_sign_keystore_id }}",
+    "keystoreEncrypt": "{{ pas_sp_enc_keystore_id }}",
+    "entityID": "{{ pas_sp_sp_id }}",
+    "ForceAuthn": "{{ pas_sp_force_authn | string | lower }}"
   }
 ]

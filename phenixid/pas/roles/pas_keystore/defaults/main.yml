@@ -1,0 +1,5 @@
+---
+# defaults file for pas_keystore
+
+pas_keystore_type: "pkcs12"
+pas_keystore_content_type: "application/x-pkcs12"

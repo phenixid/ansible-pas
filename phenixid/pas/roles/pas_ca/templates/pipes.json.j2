@@ -1,0 +1,34 @@
+[
+  {
+    "id": "{{ pas_ca_issuer_pipe_id }}",
+    "valves": [
+      {
+        "name": "ItemCreateValve",
+        "config": {
+          "dest_id": "{{ '{{request.subject}}' }}"
+        }
+      },
+      {
+        "name": "CertificateIssuerValve",
+        "config": {
+          "dest": "certificate",
+          "cert_subject_dn": "{{ '{{request.subject}}' }}",
+          "cert_subject_key": "{{ '{{request.key}}' }}",
+          "cert_serial_number": "{{ '{{request.serial_number}}' }}",
+          "cert_not_before": "{{ '{{request.not_before}}' }}",
+          "cert_not_after": "{{ '{{request.not_after}}' }}",
+          "cert_key_usage": "{{ '{{request.key_usage}}' }}",
+          "cert_ext_key_usage": "{{ '{{request.ext_key_usage}}' }}",
+          "cert_ocsp_url": "{{ '{{request.ocsp_url}}' }}",
+          "ca_ref": "{{ pas_ca_ca_id }}"
+        }
+      }
+    ]
+  },
+  {
+    "id": "{{ pas_ca_revoke_pipe_id }}",
+    "config": {
+      "valve_refs": ""
+    }
+  }
+]

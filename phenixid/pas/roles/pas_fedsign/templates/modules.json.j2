@@ -1,0 +1,39 @@
+[
+  {
+    "id": "pdf_sign_prism_00",
+    "name": "com.phenixidentity~phenix-prism",
+    "enabled": "true",
+    "config": {
+      "base_url": "/pdf_sign",
+      "auth_redirect_url": "{{ pas_fedsign_authenticator_url }}",
+      "module_refs": "pdf_sign_prism_01",
+      "http_configuration_ref": "{{ pas_fedsign_public_http }}"
+    }
+  },
+  {
+    "id": "pdf_sign_prism_01",
+    "name": "com.phenixidentity~phenix-prism-fedsigning",
+    "enabled": "false",
+    "prism_enabled": "true",
+    "config": {
+      "display_name": "PhenixID Signing Service",
+      "base_uri": "sign",
+      "sign_auth_redirect_url": "{{ pas_sp_acs_url }}",
+      "sign_pipe": "pdf_sign_sign_pipe_01",
+      "http_configuration_ref" : "{{ pas_fedsign_public_http }}"
+    }
+  },
+  {
+    "id": "files_01",
+    "name": "com.phenixidentity~phenix-files",
+    "enabled": "true",
+    "config": {
+      "read_only": "false",
+      "name": "{{ pas_fedsign_file_store_name }}",
+      "auth_method": "pipe",
+      "auth_pipe": "files_auth_01",
+      "store_impl": "com.phenixidentity.files.internal.SessionFilesStore",
+      "http_configuration_ref" : "{{ pas_fedsign_private_http }}"
+    }
+  }
+]

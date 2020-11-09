@@ -1,90 +1,89 @@
 ---
 
-- name: "Remove directories"
-  file:
-    path: "{{ pas_home }}/{{ item }}"
-    state: absent
-  with_items:
-    - "bin"
-    - "classes"
-    - "config"
-    - "data"
-    - "jre"
-    - "lib"
-    - "license"
-    - "mods"
-    - "repo"
-    - "repos.txt"
-    - "resources"
-    - "tokensin"
-    - "tokensout"
-    - "uninstall"
+- name: "Upload {{ pas_installer.local_path }} to {{ pas_installer.remote_path }}"
+  copy:
+    src: "{{ pas_installer.local_path }}"
+    dest: "{{ pas_installer.remote_path }}/"
+    mode: 0700
+    force: yes
+    owner: "{{ user }}"
   become: yes
 
-- name: "Create install directory {{ pas_home }}"
+- name: "Remove directories"
   file:
-    path: "{{ pas_home }}/{{ item }}"
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ pas_home }}/bin"
+    - "{{ pas_home }}/lib"
+    - "{{ pas_home }}/mods"
+    - "{{ pas_home }}/repo"
+    - "{{ pas_home }}/classes"
+    - "{{ pas_home }}/config"
+    - "{{ pas_home }}/resources"
+  become: yes
+
+- name: "Create directories and permissions for user {{ user }}"
+  file:
+    path: "{{ item }}"
     state: directory
     owner: "{{ user }}"
+    recurse: yes
   with_items:
-    - "license"
-    - "config"
+    - "{{ pas_home }}"
+    - "{{ pas_home }}/config"
+    - "{{ pas_home }}/license"
   become: yes
 
 - name: "Render install.varfile"
   template:
     src: install.varfile.j2
     dest: "{{ pas_home }}/install.varfile"
+    mode: 0400
     owner: "{{ user }}"
+  become: yes
 
-- name: "Install from installer {{ source.local_path | basename }}"
-  command: "{{ source.remote_path }}/{{ source.local_path | basename }} -q -varfile {{ pas_home }}/install.varfile"
-  when: source.type == "installer"
-
-- name: "Install from zip {{ source.local_path | basename }}"
-  unarchive:
-    remote_src: yes
-    src: "{{ source.remote_path }}/{{ source.local_path | basename }}"
-    dest: "{{ pas_home }}"
-    owner: "{{ user }}"
-  when: source.type == "zip"
+- name: "Install from installer {{ pas_installer.local_path | basename }}"
+  command: "{{ pas_installer.remote_path }}/{{ pas_installer.local_path | basename }} -q -varfile {{ pas_home }}/install.varfile"
+  when: pas_installer.type == "installer"
+  become: yes
+  become_user: "{{ user }}"
 
 - name: "Render sessions.xml"
   template:
     src: sessions.xml.j2
     dest: "{{ pas_home }}/config/sessions.xml"
     owner: "{{ user }}"
+  become: yes
 
 - name: "Render boot.json"
   template:
     src: boot.json.j2
     dest: "{{ pas_home }}/config/boot.json"
+    mode: 0400
     owner: "{{ user }}"
+  become: yes
 
 - name: "Add start script"
   copy:
-    src: "{{ start_script_file }}"
+    src: "{{ pas_start_script }}"
     dest: "{{ pas_home }}/bin/start-PhenixID.sh"
     owner: "{{ user }}"
-  when: start_script_file is defined
+  become: yes
+  when: pas_start_script is defined
 
 - name: "Add log configuration"
   copy:
-    src: "{{ log4j2_config_file }}"
+    src: "{{ pas_log4j2_config_file }}"
     dest: "{{ pas_home }}/config/log4j2.xml"
     owner: "{{ user }}"
-  when: log4j2_config_file is defined
+  become: yes
+  when: pas_log4j2_config_file is defined
 
 - name: "Add license"
   copy:
-    src: "{{ license_file }}"
+    src: "{{ pas_license_file }}"
     dest: "{{ pas_home }}/license/license.p12"
+    mode: 0400
     owner: "{{ user }}"
-
-- name: "Upload phenixid-pas service"
-  template:
-    src: pas.service.j2
-    dest: "/lib/systemd/system/pas.service"
-    mode: 644
   become: yes
-

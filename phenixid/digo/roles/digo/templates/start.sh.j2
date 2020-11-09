@@ -1,0 +1,12 @@
+#!/bin/sh
+
+nohup java \
+  -Dfile.encoding=UTF-8 \
+  -Dvertx.logger-delegate-factory-class-name=io.vertx.core.logging.Log4j2LogDelegateFactory \
+  -Dhazelcast.logging.type=log4j2 \
+  -Dlog4j.configurationFile=config/log4j2.xml \
+  -Djava.util.logging.config.file=config/logging.properties \
+  -Dvertx.hazelcast.config=config/hazelcast.xml \
+  {{ digo_custom_java_opts }} \
+  -cp "lib/*" \
+  com.phenixidentity.digo.sthlm.MainVerticle config/config.json 2>&1 &

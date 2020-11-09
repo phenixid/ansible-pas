@@ -1,0 +1,25 @@
+[sign]
+172.31.41.37
+172.31.38.58
+
+[digo]
+172.31.37.28
+172.31.38.125
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
+
+signing_service_host=signing.example.org
+digo_service_host=digo.example.org
+file_service_host=internal-file-service-123456789012.eu-central-1.elb.amazonaws.com
+user_service_host=172.31.24.112
+
+db_url="jdbc:sqlserver://172.31.14.128:1433;database=digo"
+idp_sso_url="http://idp.example.org:80/saml/authenticate/digo"
+signing_service_url="http://{{ signing_public_host }}:80/pdf_sign"
+digo_service_url="http://{{ digo_service_host }}:80"
+file_service_url="http://{{ file_service_host }}:6767/files/session"
+citizens_query_url="http://{{ user_service_host }}:8444/pipes/phenix/citizens"
+fob_query_url="http://{{ user_service_host }}:8444/pipes/phenix/fob"
+edu_query_url="http://{{ user_service_host }}:8444/pipes/phenix/edu"
+employees_query_url="http://{{ user_service_host }}:8444/pipes/phenix/employees"

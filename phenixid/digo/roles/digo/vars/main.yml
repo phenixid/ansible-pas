@@ -1,0 +1,5 @@
+---
+# vars file for digo
+
+digo_home: "{{ digo_install_directory }}/digo"
+pas_sp_idp_id: "{{ signing_service_idp_id }}"

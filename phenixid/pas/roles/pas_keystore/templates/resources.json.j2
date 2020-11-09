@@ -1,0 +1,8 @@
+[
+  {
+    "id": "{{ pas_keystore_resource_id }}",
+    "content_type": "{{ pas_keystore_content_type }}",
+    "content_encoding": "base64",
+    "content": "{{ lookup('file', pas_keystore) | b64encode }}"
+  }
+]

@@ -1,0 +1,238 @@
+[
+  {
+    "id": "HealthCheck",
+    "description": "Health check",
+    "http_enabled": "true",
+    "http_path_pattern": "GET:/pipes/phenix/health",
+    "valves": [
+    ]
+  },
+  {
+    "name": "Pdf sign - Execute Sign",
+    "description": "Signs file stored in supplied session (file_id) and replaces the file with the signed copy.",
+    "enabled": "true",
+    "id": "pdf_sign_sign_pipe_01",
+    "valves": [
+      {
+        "name": "SessionLoadValve",
+        "enabled": "true",
+        "config": {
+          "id": "{{ '{{request.session_id}}' }}"
+        }
+      },
+      {
+        "name": "ItemCreateValve",
+        "enabled": "true",
+        "config": {
+          "dest_id": "{{ '{{request.session_id}}' }}"
+        }
+      },
+      {% for property in pas_fedsign_subject_key_properties %}
+      {
+        "name": "PropertyFromSessionToItem",
+        "config": {
+          "source": "{{ property }}"
+        }
+      },
+      {% endfor %}
+      {
+        "name": "SessionLoadValve",
+        "enabled": "true",
+        "config": {
+          "id": "{{ '{{request.file_id}}' }}",
+          "require_session": "true",
+          "require_auth_session": "false"
+        }
+      },
+      {
+        "name": "PropertyAddValve",
+        "enabled": "true",
+        "config": {
+          "name": "content",
+          "value": "{{ '{{session.content}}' }}"
+        }
+      },
+      {
+        "name": "PropertyBase64DecoderValve",
+        "config": {
+          "source": "content",
+          "dest": "temporary"
+        }
+      },
+      {
+        "name": "CreateShortTermKeyStoreValve",
+        "enabled": "true",
+        "config": {
+          "subjectKeyParamater": "{{ pas_fedsign_subject_key }}",
+          "caTemplateKeyParamater": "{{ pas_fedsign_ca_id }}",
+          "keyUsage": [
+            "true",
+            "true"
+          ]
+        }
+      },
+      {
+        "name": "PADESSignValve",
+        "enabled": "true",
+        "config": {
+          "keyStoreID": "{{ '{{item.keyStoreId}}' }}",
+          "pdfSourceData": "{{ '{{item.temporary}}' }}",
+          "pdfTarget": "document"
+        }
+      },
+      {
+        "name": "SessionPropertyReplaceValve",
+        "enabled": "true",
+        "config": {
+          "name": "content",
+          "value": "{{ '{{item.document}}' }}"
+        }
+      },
+      {
+        "name": "SessionPropertyReplaceValve",
+        "enabled": "true",
+        "config": {
+          "name": "modified",
+          "value": "{{ '{{now}}' }}"
+        }
+      },
+      {
+        "name": "SessionPersistValve",
+        "enabled": "true",
+        "config": {}
+      }
+    ]
+  },
+  {
+    "id": "files_auth_01",
+    "valves": [
+      {
+        "name": "HttpBasicAuthValve",
+        "enabled": "true",
+        "config": {
+          "username_dest": "uid",
+          "password_dest": "pwd"
+        }
+      },
+      {
+        "name": "InternalUserStoreValidatorValve",
+        "enabled": "true",
+        "config": {
+          "username": "{{ '{{attributes.uid}}' }}",
+          "password_param_name": "{{ '{{attributes.pwd}}' }}"
+        }
+      },
+      {
+        "name": "ItemCreateValve",
+        "enabled": "true",
+        "config": {
+          "dest_id": "{{ '{{attributes.uid}}' }}"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Pdf sign initial auth",
+    "description": "Pipe for initial auth in pdf_sign. Parse jwt token and add properties to session",
+    "enabled": "true",
+    "id": "pipe_pdf_sign_auth_00",
+    "valves": [
+      {
+        "name": "ItemCreateValve",
+        "enabled": "true",
+        "config": {
+          "dest_id": "_"
+        }
+      },
+      {
+        "name": "JWTTokenParserValve",
+        "enabled": "true",
+        "config": {
+          "access_token": "access_token",
+          "certfilepath": "{{ pas_fedsign_jwt_certificate.remote_path }}/{{ pas_fedsign_jwt_certificate.local_path | basename }}",
+          "additional_attributes": [
+            "id",
+            "failURL",
+            "successURL",
+            "cancelURL"
+          ]
+        }
+      },
+      {
+        "name": "SessionLoadValve",
+        "enabled": "true",
+        "config": {
+          "id": "{{ '{{item.jwt_id}}' }}",
+          "require_session": "true",
+          "require_auth_session": "false"
+        }
+      },
+      {
+        "name": "PropertyAddValve",
+        "enabled": "true",
+        "config": {
+          "name": "file_id",
+          "value": "{{ '{{item.jwt_id}}' }}"
+        }
+      },
+      {
+        "name": "PropertyAddValve",
+        "enabled": "true",
+        "config": {
+          "name": "content",
+          "value": "{{ '{{session.content}}' }}"
+        }
+      },
+      {
+        "name": "PropertyAddValve",
+        "enabled": "true",
+        "config": {
+          "name": "success_url",
+          "value": "{{ '{{item.jwt_successURL}}' }}"
+        }
+      },
+      {
+        "name": "PropertyAddValve",
+        "enabled": "true",
+        "config": {
+          "name": "failure_url",
+          "value": "{{ '{{item.jwt_failURL}}' }}"
+        }
+      },
+      {
+        "name": "PropertyAddValve",
+        "enabled": "true",
+        "config": {
+          "name": "cancel_url",
+          "value": "{{ '{{item.jwt_cancelURL}}' }}"
+        }
+      },
+      {
+        "name": "PropertyAddValve",
+        "enabled": "true",
+        "config": {
+          "name": "content_type",
+          "value": "application/pdf"
+        }
+      }
+    ]
+  },
+  {
+    "id": "signing_assertion_consumer",
+    "valves": [
+      {
+        "name": "AssertionConsumer",
+        "config": {
+          "clock_skew_minutes": "2"
+        }
+      },
+      {
+        "name": "FlowFailValve",
+        "config": {
+          "message": "User does not exist",
+          "exec_if_expr": "flow.items().isEmpty()"
+        }
+      }
+    ]
+  }
+]

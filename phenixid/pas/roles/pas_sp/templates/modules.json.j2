@@ -2,18 +2,9 @@
   {
     "name": "com.phenixidentity~phenix-saml",
     "enabled": "true",
-    "id": "39872519-78db-4194-9164-f7eb4abc0bc6",
+    "id": "{{ pas_sp_saml_module_id }}",
     "config": {
-      "http_configuration_ref": "5efdd8a7-f12b-4c93-9857-0b74bf98e888"
-    }
-  },
-  {
-    "name": "com.phenixidentity~auth-http",
-    "enabled": "true",
-    "id": "d0e438ab-f08b-4cf8-9096-9898e32c41d0",
-    "config": {
-      "root_uri": "/config",
-      "http_configuration_ref": "5efdd8a7-f12b-4c93-9857-0b74bf98e888"
+      "http_configuration_ref": "{{ pas_sp_public_http }}"
     }
   }
 ]
