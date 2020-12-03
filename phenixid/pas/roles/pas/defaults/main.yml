@@ -10,3 +10,5 @@ pas_ca_http_port: "{{ pas_default_http_port }}"
 pas_pipes_http_port: "{{ pas_default_http_port }}"
 pas_http_root_uri: "/config"
 pas_is_virtual: yes
+pas_config_api_host: "127.0.0.1"
+pas_config_api_port: 9443

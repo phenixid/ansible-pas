@@ -51,7 +51,8 @@
     ],
     "trustedCertificates": [
       "{{ digo_saml_trust.remote_path }}/{{ digo_saml_trust.local_path | basename }}"
-    ]
+    ],
+    "skewTime": {{ digo_saml_skew_time }}
   },
   "smtp": {
     "host": "{{ digo_smtp_host }}",

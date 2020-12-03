@@ -6,3 +6,4 @@ digo_user_service_ssl_client: no
 digo_user_service_ssl_trust_all: no
 digo_user_service_ssl_key_pass: ""
 digo_custom_java_opts: ""
+digo_saml_skew_time: 30000
