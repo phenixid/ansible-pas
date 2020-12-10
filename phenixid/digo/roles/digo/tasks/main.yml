@@ -1,8 +1,8 @@
 ---
 
-- name: "Create DIGO_HOME: {{ digo_install_directory }}/digo"
+- name: "Create DIGO_HOME: {{ digo_home }}"
   file:
-    path: "{{ digo_install_directory }}/digo"
+    path: "{{ digo_home }}"
     owner: "{{ digo_service_user }}"
     group: "{{ digo_service_group }}"
     mode: 0400
@@ -14,10 +14,10 @@
     path: "{{ item }}"
     state: absent
   with_items:
-    - "{{ digo_install_directory }}/digo/config"
-    - "{{ digo_install_directory }}/digo/lib"
-    - "{{ digo_install_directory }}/digo/public"
-    - "{{ digo_install_directory }}/digo/resources"
+    - "{{ digo_home }}/config"
+    - "{{ digo_home }}/lib"
+    - "{{ digo_home }}/public"
+    - "{{ digo_home }}/resources"
   become: yes
 
 - name: "Install from zip file {{ digo_installer.remote_path }}/{{ digo_installer.local_path | basename }}"
