@@ -58,6 +58,19 @@
   when: digo_user_service_ssl_key is not undefined
 
 - name: "Add keys and SAML trust"
+  file:
+    path: "{{ item.remote_path }}"
+    owner: "{{ digo_service_user }}"
+    group: "{{ digo_service_group }}"
+    mode: 0400
+    state: directory
+  with_items:
+    - "{{ digo_saml_trust }}"
+    - "{{ digo_private_key }}"
+    - "{{ digo_certificate }}"
+  become: yes
+
+- name: "Add keys and SAML trust"
   copy:
     src: "{{ item.local_path }}"
     dest: "{{ item.remote_path }}/{{ item.local_path | basename }}"
