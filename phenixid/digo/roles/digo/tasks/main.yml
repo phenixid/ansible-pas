@@ -1,14 +1,5 @@
 ---
 
-- name: "Create DIGO_HOME: {{ digo_home }}"
-  file:
-    path: "{{ digo_home }}"
-    owner: "{{ digo_service_user }}"
-    group: "{{ digo_service_group }}"
-    mode: 0400
-    state: directory
-  become: yes
-
 - name: "Remove directories"
   file:
     path: "{{ item }}"
@@ -62,7 +53,7 @@
     path: "{{ item.remote_path }}"
     owner: "{{ digo_service_user }}"
     group: "{{ digo_service_group }}"
-    mode: 0400
+    mode: 0500
     state: directory
   with_items:
     - "{{ digo_saml_trust }}"
