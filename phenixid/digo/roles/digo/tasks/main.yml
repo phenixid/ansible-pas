@@ -27,7 +27,6 @@
     dest: "{{ digo_install_directory }}"
     owner: "{{ digo_service_user }}"
     group: "{{ digo_service_group }}"
-  become_user: "{{ digo_service_user }}"
   become: yes
 
 - name: "Add TLS trust"
