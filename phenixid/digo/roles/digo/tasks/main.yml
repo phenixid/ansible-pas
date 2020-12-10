@@ -1,40 +1,51 @@
 ---
 
+- name: "Create DIGO_HOME: {{ digo_install_directory }}/digo"
+  file:
+    path: "{{ digo_install_directory }}/digo"
+    owner: "{{ digo_service_user }}"
+    group: "{{ digo_service_group }}"
+    mode: 0400
+    state: directory
+  become: yes
+
 - name: "Remove directories"
   file:
     path: "{{ item }}"
     state: absent
   with_items:
-    - "{{ digo_home }}/config"
-    - "{{ digo_home }}/lib"
-    - "{{ digo_home }}/public"
-    - "{{ digo_home }}/resources"
+    - "{{ digo_install_directory }}/digo/config"
+    - "{{ digo_install_directory }}/digo/lib"
+    - "{{ digo_install_directory }}/digo/public"
+    - "{{ digo_install_directory }}/digo/resources"
   become: yes
 
-- name: "Install from zip file {{ digo_installer.remote_path }}/{{ source.local_path | basename }}"
+- name: "Install from zip file {{ digo_installer.remote_path }}/{{ digo_installer.local_path | basename }}"
   unarchive:
     remote_src: yes
     src: "{{ digo_installer.remote_path }}/{{ digo_installer.local_path | basename }}"
     dest: "{{ digo_install_directory }}"
-    owner: "{{ user }}"
-    group: "{{ group }}"
-  become_user: "{{ user }}"
+    owner: "{{ digo_service_user }}"
+    group: "{{ digo_service_group }}"
+  become_user: "{{ digo_service_user }}"
   become: yes
 
-- set_fact:
-    ssl_trust_file: "{{ digo_user_service_ssl_trust.remote_path }}/{{ digo_user_service_ssl_trust.local_path | basename }}"
+- name: "Add TLS trust"
+  set_fact:
+    digo_ssl_trust_file: "{{ digo_user_service_ssl_trust.remote_path }}/{{ digo_user_service_ssl_trust.local_path | basename }}"
   when: digo_user_service_ssl_trust is not undefined
 
 - name: "Add TLS trust"
   copy:
     src: "{{ digo_user_service_ssl_trust.local_path }}"
-    dest: "{{ ssl_trust_file }}"
+    dest: "{{ digo_ssl_trust_file }}"
     mode: 0400
-    owner: "{{ user }}"
+    owner: "{{ digo_service_user }}"
   become: yes
   when: digo_user_service_ssl_trust is not undefined
 
-- set_fact:
+- name: "Add TLS key"
+  set_fact:
     ssl_key_file: "{{ digo_user_service_ssl_key.remote_path }}/{{ digo_user_service_ssl_key.local_path | basename }}"
   when: digo_user_service_ssl_key is not undefined
 
@@ -43,7 +54,7 @@
     src: "{{ digo_user_service_ssl_key.local_path }}"
     dest: "{{ ssl_key_file }}"
     mode: 0400
-    owner: "{{ user }}"
+    owner: "{{ digo_service_user }}"
   become: yes
   when: digo_user_service_ssl_key is not undefined
 
@@ -52,7 +63,7 @@
     src: "{{ item.local_path }}"
     dest: "{{ item.remote_path }}/{{ item.local_path | basename }}"
     mode: 0400
-    owner: "{{ user }}"
+    owner: "{{ digo_service_user }}"
   with_items:
     - "{{ digo_saml_trust }}"
     - "{{ digo_private_key }}"
@@ -64,7 +75,7 @@
     src: "{{ digo_log4j2_config_file }}"
     dest: "{{ digo_home }}/config/log4j2.xml"
     mode: 0400
-    owner: "{{ user }}"
+    owner: "{{ digo_service_user }}"
   become: yes
   when: digo_log4j2_config_file is defined
 
@@ -73,7 +84,7 @@
     src: "{{ digo_hazelcast_config_file }}"
     dest: "{{ digo_home }}/config/hazelcast.xml"
     mode: 0400
-    owner: "{{ user }}"
+    owner: "{{ digo_service_user }}"
   become: yes
   when: digo_hazelcast_config_file is defined
 
@@ -82,7 +93,7 @@
     src: "config.json.j2"
     dest: "{{ digo_home }}/config/config.json"
     mode: 0400
-    owner: "{{ user }}"
+    owner: "{{ digo_service_user }}"
   become: yes
 
 - name: "Render start.sh"
@@ -90,6 +101,6 @@
     src: "start.sh.j2"
     dest: "{{ digo_home }}/start.sh"
     mode: 0500
-    owner: "{{ user }}"
+    owner: "{{ digo_service_user }}"
   become: yes
 

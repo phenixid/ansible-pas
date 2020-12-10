@@ -68,7 +68,7 @@
     "useSsl": {{ digo_user_service_ssl | bool | lower }},
     "useSslClientCert": {{ digo_user_service_ssl_client | bool | lower }},
     "useSslTrustAll": {{ digo_user_service_ssl_trust_all | bool | lower }},
-    "sslTrustFile": "{{ ssl_trust_file | default('') }}",
+    "sslTrustFile": "{{ digo_ssl_trust_file | default('') }}",
     "sslKeyFile": "{{ ssl_key_file | default('') }}",
     "sslKeyPassword": "{{ digo_user_service_ssl_key_pass }}",
     "citizensUrl": "{{ citizens_query_url }}",

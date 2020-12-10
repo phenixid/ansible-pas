@@ -1,4 +1,0 @@
----
-# vars file for digo_service
-
-digo_home: "{{ digo_install_directory }}/digo"
