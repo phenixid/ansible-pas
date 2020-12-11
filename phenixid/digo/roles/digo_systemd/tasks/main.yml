@@ -1,5 +1,10 @@
 ---
 
+- include_role:
+    name: phenixid.util.systemd
+  vars:
+    service_name: digo
+
 - name: "Upload {{ digo_installer.local_path }} to {{ digo_installer.remote_path }}"
   copy:
     src: "{{ digo_installer.local_path }}"
@@ -8,11 +13,6 @@
     force: yes
     owner: "{{ digo_service_user }}"
   become: yes
-
-- include_role:
-    name: phenixid.util.systemd
-  vars:
-    service_name: digo
 
 - include_role:
     name: phenixid.digo.digo
