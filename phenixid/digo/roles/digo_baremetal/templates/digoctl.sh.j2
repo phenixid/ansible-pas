@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+start() {
+  export DIGO_HOME="{{ digo_install_directory }}/digo"; "$DIGO_HOME"/start.sh
+}
+
+stop() {
+  pgrep -f "com.phenixidentity.digo.MainVerticle" | xargs -I % kill %
+}
+
+status() {
+  pgrep -f "com.phenixidentity.digo.MainVerticle" | xargs -I % [ -z % ] && echo "Down" || echo "Up"
+}
+
+logs() {
+  tail "$*" "{{ digo_install_directory }}/digo/logs/server.log"
+}
+
+case "$1" in
+    'start')
+        shift; start
+        ;;
+    'stop')
+        shift; stop
+        ;;
+    'status')
+        shift; status
+        ;;
+    'logs')
+        shift; logs "$*"
+        ;;
+    *)
+        echo "Unknown option: $1"
+        usage
+        exit
+        ;;
+esac

@@ -23,8 +23,8 @@
     "documentLocationId": {{ digo_file_location_id }}
   },
   "jwt": {
-    "privateKeyFile": "{{ digo_private_key.remote_path }}/{{ digo_private_key.local_path | basename }}",
-    "publicCertFile": "{{ digo_certificate.remote_path }}/{{ digo_certificate.local_path | basename }}"
+    "privateKeyFile": "{{ digo_private_key_path }}",
+    "publicCertFile": "{{ digo_certificate_path }}"
   },
   "signingService": {
     "url": "{{ digo_signing_service_url }}/authenticate/logout/?nextTarget={{ digo_signing_service_url }}/"
@@ -50,7 +50,7 @@
       "{{ digo_saml_idp_id }}"
     ],
     "trustedCertificates": [
-      "{{ digo_saml_trust.remote_path }}/{{ digo_saml_trust.local_path | basename }}"
+      "{{ digo_saml_trust_path }}"
     ],
     "skewTime": {{ digo_saml_skew_time }}
   },
@@ -68,8 +68,8 @@
     "useSsl": {{ digo_user_service_ssl | bool | lower }},
     "useSslClientCert": {{ digo_user_service_ssl_client | bool | lower }},
     "useSslTrustAll": {{ digo_user_service_ssl_trust_all | bool | lower }},
-    "sslTrustFile": "{{ digo_ssl_trust_file | default('') }}",
-    "sslKeyFile": "{{ ssl_key_file | default('') }}",
+    "sslTrustFile": "{{ digo_ssl_trust_file }}",
+    "sslKeyFile": "{{ digo_ssl_key_file }}",
     "sslKeyPassword": "{{ digo_user_service_ssl_key_pass }}",
     "citizensUrl": "{{ digo_citizens_query_url }}",
     "employeesUrl": "{{ digo_employees_query_url }}",

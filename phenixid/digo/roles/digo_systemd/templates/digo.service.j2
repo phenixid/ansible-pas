@@ -1,0 +1,18 @@
+[Unit]
+Description=DIGO
+After=network.target
+
+[Service]
+Type=forking
+WorkingDirectory={{ digo_home }}
+Environment=DIGO_HOME={{ digo_home }}
+ExecStart={{ digo_home }}/start.sh
+User={{ digo_service_user }}
+Group={{ digo_service_group }}
+UMask=0007
+Restart={{ service_restart | default('no') }}
+RestartSec={{ service_restart_sec | default(60) }}
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target

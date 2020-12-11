@@ -1,12 +1,20 @@
 #!/bin/sh
 
+usage() {
+  echo "Invalid DIGO_HOME: $DIGO_HOME"
+  exit 1
+}
+
+echo "${DIGO_HOME}" | xargs -I % [ -z % ] && usage
+cd "${DIGO_HOME}" || usage
+
 nohup java \
   -Dfile.encoding=UTF-8 \
   -Dvertx.logger-delegate-factory-class-name=io.vertx.core.logging.Log4j2LogDelegateFactory \
   -Dhazelcast.logging.type=log4j2 \
-  -Dlog4j.configurationFile=config/log4j2.xml \
-  -Djava.util.logging.config.file=config/logging.properties \
-  -Dvertx.hazelcast.config=config/hazelcast.xml \
+  -Dlog4j.configurationFile="config/log4j2.xml" \
+  -Djava.util.logging.config.file="config/logging.properties" \
+  -Dvertx.hazelcast.config="config/hazelcast.xml" \
   {{ digo_custom_java_opts }} \
   -cp "lib/*" \
-  com.phenixidentity.digo.MainVerticle config/config.json 2>&1 &
+  com.phenixidentity.digo.MainVerticle "$@" "config/config.json" > "logs/nohup.out" 2>&1 &
