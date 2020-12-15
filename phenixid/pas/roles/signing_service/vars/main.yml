@@ -23,6 +23,9 @@ pas_fedsign_subject_key_properties: "{{ signing_service_subject_key_properties }
 pas_fedsign_subject_key: "{{ signing_service_subject_key }}"
 pas_fedsign_jwt_certificate: "{{ signing_service_jwt_certificate }}"
 pas_fedsign_file_store_name: "session"
+pas_fedsign_user: "{{ signing_service_pas_user }}"
+pas_fedsign_user_password: "{{ signing_service_pas_user_password }}"
+
 pas_ca_profiles: "{{ signing_service_ca_profiles }}"
 pas_ca_http_enabled: no
 pas_ca_http_port: "{{ pas_http_servers[0].port }}"

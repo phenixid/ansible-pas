@@ -2,13 +2,21 @@
 # defaults file for pas
 
 pas_admin_user: "phenixid"
-pas_session_cluster_port: 5702
-pas_db_encryption_key: "dummy2"
-pas_db_client_password: "dummy3"
-pas_default_http_port: 8443
+pas_admin_password: "{{ lookup('password', '/dev/null length=15 chars=ascii_letters,digits') }}"
+pas_db_encryption_key: "{{ lookup('password', '/dev/null length=15 chars=ascii_letters,digits') }}"
+pas_db_client_password: "{{ lookup('password', '/dev/null length=15 chars=ascii_letters,digits') }}"
+pas_enc_key: "{{ lookup('password', '/dev/null length=15 chars=ascii_letters,digits') }}"
 pas_ca_http_port: "{{ pas_default_http_port }}"
 pas_pipes_http_port: "{{ pas_default_http_port }}"
 pas_http_root_uri: "/config"
-pas_is_virtual: yes
 pas_config_api_host: "127.0.0.1"
+pas_session_cluster_port: 5702
+pas_default_http_port: 8443
 pas_config_api_port: 9443
+pas_is_virtual: yes
+pas_ca_http_enabled: no
+pas_http_use_ssl: no
+
+pas_pipes_http_configuration_ref: ""
+pas_ca_http_configuration_ref: ""
+pas_http_allowed_logout_target: ""

@@ -1,0 +1,5 @@
+---
+# defaults file for pas_systemd
+
+pas_pipes_http_enabled: no
+pas_service_state: started

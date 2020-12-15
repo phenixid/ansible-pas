@@ -1,14 +1,5 @@
 ---
 
-- name: "Upload {{ pas_installer.local_path }} to {{ pas_installer.remote_path }}"
-  copy:
-    src: "{{ pas_installer.local_path }}"
-    dest: "{{ pas_installer.remote_path }}/"
-    mode: 0700
-    force: yes
-    owner: "{{ user }}"
-  become: yes
-
 - name: "Remove directories"
   file:
     path: "{{ item }}"
@@ -23,11 +14,12 @@
     - "{{ pas_home }}/resources"
   become: yes
 
-- name: "Create directories and permissions for user {{ user }}"
+- name: "Create install directory"
   file:
     path: "{{ item }}"
     state: directory
-    owner: "{{ user }}"
+    owner: "{{ pas_service_user }}"
+    group: "{{ pas_service_group }}"
     recurse: yes
   with_items:
     - "{{ pas_home }}"
@@ -40,20 +32,32 @@
     src: install.varfile.j2
     dest: "{{ pas_home }}/install.varfile"
     mode: 0400
-    owner: "{{ user }}"
+    owner: "{{ pas_service_user }}"
+    group: "{{ pas_service_group }}"
   become: yes
 
 - name: "Install from installer {{ pas_installer.local_path | basename }}"
   command: "{{ pas_installer.remote_path }}/{{ pas_installer.local_path | basename }} -q -varfile {{ pas_home }}/install.varfile"
   when: pas_installer.type == "installer"
   become: yes
-  become_user: "{{ user }}"
+  become_user: "{{ pas_service_user }}"
+
+- name: "Set file and group ownership"
+  file:
+    path: "{{ pas_home }}"
+    state: directory
+    owner: "{{ pas_service_user }}"
+    group: "{{ pas_service_group }}"
+    mode: "o-rwx"
+    recurse: yes
+  become: yes
 
 - name: "Render sessions.xml"
   template:
     src: sessions.xml.j2
     dest: "{{ pas_home }}/config/sessions.xml"
-    owner: "{{ user }}"
+    owner: "{{ pas_service_user }}"
+    group: "{{ pas_service_group }}"
   become: yes
 
 - name: "Render boot.json"
@@ -61,14 +65,16 @@
     src: boot.json.j2
     dest: "{{ pas_home }}/config/boot.json"
     mode: 0400
-    owner: "{{ user }}"
+    owner: "{{ pas_service_user }}"
+    group: "{{ pas_service_group }}"
   become: yes
 
 - name: "Add start script"
   copy:
     src: "{{ pas_start_script }}"
     dest: "{{ pas_home }}/bin/start-PhenixID.sh"
-    owner: "{{ user }}"
+    owner: "{{ pas_service_user }}"
+    group: "{{ pas_service_group }}"
   become: yes
   when: pas_start_script is defined
 
@@ -76,7 +82,8 @@
   copy:
     src: "{{ pas_log4j2_config_file }}"
     dest: "{{ pas_home }}/config/log4j2.xml"
-    owner: "{{ user }}"
+    owner: "{{ pas_service_user }}"
+    group: "{{ pas_service_group }}"
   become: yes
   when: pas_log4j2_config_file is defined
 
@@ -85,5 +92,6 @@
     src: "{{ pas_license_file }}"
     dest: "{{ pas_home }}/license/license.p12"
     mode: 0400
-    owner: "{{ user }}"
+    owner: "{{ pas_service_user }}"
+    group: "{{ pas_service_group }}"
   become: yes

@@ -1,13 +1,8 @@
 ---
 
-- include_role:
-    name: phenixid.util.systemd
-  vars:
-    service_name: pas
-  when: skip_install|default(False) == False
 
 - include_role:
-    name: phenixid.pas.pas
+    name: phenixid.pas.pas_systemd
   when: skip_install|default(False) == False
 
 - name: "Start service"
