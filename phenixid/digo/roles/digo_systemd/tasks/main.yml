@@ -52,7 +52,7 @@
 - include_role:
     name: phenixid.digo.digo
 
-- name: "Start service"
+- name: "Start service 'digo'"
   systemd:
     state: started
     daemon_reload: yes

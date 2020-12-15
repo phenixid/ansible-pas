@@ -4,8 +4,8 @@
 digo_signing_service_url: "{{ signing_service_url }}"
 
 digo_file_service_url: "{{ file_service_url }}"
-digo_file_service_username: "{{ pas_admin_user }}"
-digo_file_service_password: "{{ pas_admin_password }}"
+digo_file_service_username: "{{ file_service_username }}"
+digo_file_service_password: "{{ file_service_password }}"
 
 digo_citizens_query_url: "{{ citizens_query_url }}"
 digo_fob_query_url: "{{ fob_query_url }}"
