@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+start() {
+  export PAS_HOME="{{ pas_home }}"; "$PAS_HOME"/bin/start-PhenixID.sh
+}
+
+stop() {
+  pgrep -f "com.phenixidentity.digo.MainVerticle" | xargs -I % kill %
+}
+
+status() {
+  pgrep -f "com.phenixidentity.digo.MainVerticle" | xargs -I % [ -z % ] && echo "Down" || echo "Up"
+}
+
+logs() {
+  tail "$*" "{{ pas_home }}/logs/server.log"
+}
+
+case "$1" in
+    'start')
+        shift; start
+        ;;
+    'stop')
+        shift; stop
+        ;;
+    'status')
+        shift; status
+        ;;
+    'logs')
+        shift; logs "$*"
+        ;;
+    *)
+        echo "Unknown option: $1"
+        usage
+        exit
+        ;;
+esac

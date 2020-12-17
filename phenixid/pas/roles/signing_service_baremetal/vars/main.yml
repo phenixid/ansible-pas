@@ -1,0 +1,4 @@
+---
+# vars file for signing_service_baremetal
+
+pas_home: "{{ pas_install_directory }}/server"

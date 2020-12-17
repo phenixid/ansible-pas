@@ -12,6 +12,7 @@
     - "{{ pas_home }}/classes"
     - "{{ pas_home }}/config"
     - "{{ pas_home }}/resources"
+    - "{{ pas_home }}/jre"
   become: yes
 
 - name: "Create install directory"
@@ -34,13 +35,32 @@
     mode: 0400
     owner: "{{ pas_service_user }}"
     group: "{{ pas_service_group }}"
+  when: pas_installer.type == "installer"
   become: yes
 
-- name: "Install from installer {{ pas_installer.local_path | basename }}"
-  command: "{{ pas_installer.remote_path }}/{{ pas_installer.local_path | basename }} -q -varfile {{ pas_home }}/install.varfile"
+- name: "Set permissions for installer"
+  file:
+    path: "{{ pas_installer_path }}"
+    owner: "{{ pas_service_user }}"
+    group: "{{ pas_service_group }}"
+    mode: 0500
+  become: yes
+
+- name: "Install from installer: {{ pas_installer_path }}"
+  command: "{{ pas_installer_path }} -q -varfile {{ pas_home }}/install.varfile"
   when: pas_installer.type == "installer"
   become: yes
   become_user: "{{ pas_service_user }}"
+
+- name: "Install from {{ pas_installer_path }} to{{ pas_install_directory }}"
+  unarchive:
+    remote_src: yes
+    src: "{{ pas_installer_path }}"
+    dest: "{{ pas_install_directory }}"
+    owner: "{{ pas_service_user }}"
+    group: "{{ pas_service_group }}"
+  when: pas_installer.type == "zip"
+  become: yes
 
 - name: "Set file and group ownership"
   file:
@@ -51,6 +71,26 @@
     mode: "o-rwx"
     recurse: yes
   become: yes
+
+- name: "Set executable permissions"
+  file:
+    path: "{{ pas_home }}/{{ item }}"
+    owner: "{{ pas_service_user }}"
+    group: "{{ pas_service_group }}"
+    mode: 0550
+  with_items:
+    - "bin/version.sh"
+    - "bin/start-PhenixID.sh"
+    - "bin/stop-PhenixID.sh"
+  become: yes
+
+- name: "replace java command"
+  replace:
+    path: "{{ pas_home }}/bin/start-PhenixID.sh"
+    regexp: 'pathtojava'
+    replace: 'java'
+    backup: yes
+  when: pas_installer.type == "zip"
 
 - name: "Render sessions.xml"
   template:

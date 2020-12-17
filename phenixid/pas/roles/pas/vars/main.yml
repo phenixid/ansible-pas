@@ -1,2 +1,4 @@
 ---
 # vars file for pas
+
+pas_installer_path: "{{ pas_installer.remote_path | default(pas_installer.local_path | dirname) }}/{{ pas_installer.local_path | basename }}"

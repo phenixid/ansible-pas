@@ -1,0 +1,5 @@
+---
+# defaults file for signing_service_baremetal
+
+pas_pipes_http_enabled: no
+

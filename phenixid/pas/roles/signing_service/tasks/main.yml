@@ -1,25 +1,13 @@
 ---
 
-
-- include_role:
-    name: phenixid.pas.pas_systemd
-  when: skip_install|default(False) == False
-
-- name: "Start service"
-  systemd:
-    state: started
-    daemon_reload: yes
-    name: pas
-  become: yes
-  when: skip_install|default(False) == False
-
 - name: "Waiting for config API to become available..."
   wait_for:
     host: "{{ pas_config_api_host }}"
     port: "{{ pas_config_api_port }}"
   when: skip_configure|default(False) == False
 
-- include_role:
+- name: "Configure federated signing"
+  include_role:
     name: phenixid.pas.pas_fedsign
   when: skip_configure|default(False) == False
 
