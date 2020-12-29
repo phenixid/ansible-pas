@@ -46,17 +46,16 @@
     mode: 0500
   become: yes
 
-- name: "Install from installer: {{ pas_installer_path }}"
+- name: "Install from {{ pas_installer_path }} to {{ pas_home | dirname }}"
   command: "{{ pas_installer_path }} -q -varfile {{ pas_home }}/install.varfile"
   when: pas_installer.type == "installer"
   become: yes
-  become_user: "{{ pas_service_user }}"
 
-- name: "Install from {{ pas_installer_path }} to{{ pas_install_directory }}"
+- name: "Install from {{ pas_installer_path }} to {{ pas_home | dirname }}"
   unarchive:
     remote_src: yes
     src: "{{ pas_installer_path }}"
-    dest: "{{ pas_install_directory }}"
+    dest: "{{ pas_home | dirname }}"
     owner: "{{ pas_service_user }}"
     group: "{{ pas_service_group }}"
   when: pas_installer.type == "zip"
@@ -84,13 +83,14 @@
     - "bin/stop-PhenixID.sh"
   become: yes
 
-- name: "replace java command"
+- name: "Replace java command"
   replace:
     path: "{{ pas_home }}/bin/start-PhenixID.sh"
     regexp: 'pathtojava'
     replace: 'java'
     backup: yes
   when: pas_installer.type == "zip"
+  become: yes
 
 - name: "Render sessions.xml"
   template:
@@ -109,15 +109,6 @@
     group: "{{ pas_service_group }}"
   become: yes
 
-- name: "Add start script"
-  copy:
-    src: "{{ pas_start_script }}"
-    dest: "{{ pas_home }}/bin/start-PhenixID.sh"
-    owner: "{{ pas_service_user }}"
-    group: "{{ pas_service_group }}"
-  become: yes
-  when: pas_start_script is defined
-
 - name: "Add log configuration"
   copy:
     src: "{{ pas_log4j2_config_file }}"
@@ -126,6 +117,15 @@
     group: "{{ pas_service_group }}"
   become: yes
   when: pas_log4j2_config_file is defined
+
+- name: "Add start script"
+  copy:
+    src: "{{ pas_start_script }}"
+    dest: "{{ pas_home }}/bin/start-PhenixID.sh"
+    owner: "{{ pas_service_user }}"
+    group: "{{ pas_service_group }}"
+  become: yes
+  when: pas_start_script is defined
 
 - name: "Add license"
   copy:

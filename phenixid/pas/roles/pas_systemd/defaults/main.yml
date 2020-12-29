@@ -3,3 +3,4 @@
 
 pas_pipes_http_enabled: no
 pas_service_state: started
+java_home: ""

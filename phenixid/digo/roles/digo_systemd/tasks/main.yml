@@ -52,9 +52,9 @@
 - include_role:
     name: phenixid.digo.digo
 
-- name: "Start service 'digo'"
+- name: "Service state: {{ digo_service_state }}"
   systemd:
-    state: started
+    state: "{{ digo_service_state }}"
     daemon_reload: yes
     name: digo
   become: yes

@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 
 start() {
-  export PAS_HOME="{{ pas_home }}"; "$PAS_HOME"/bin/start-PhenixID.sh
+  export JAVA_HOME="{{ java_home }}";
+  "{{ pas_home }}"/bin/start-PhenixID.sh
 }
 
 stop() {
-  pgrep -f "com.phenixidentity.digo.MainVerticle" | xargs -I % kill %
+  "{{ pas_home }}"/bin/stop-PhenixID.sh
 }
 
 status() {
-  pgrep -f "com.phenixidentity.digo.MainVerticle" | xargs -I % [ -z % ] && echo "Down" || echo "Up"
+  pgrep -f "com.phenixidentity.server.Server" | xargs -I % [ -z % ] && echo "Down" || echo "Up"
 }
 
 logs() {

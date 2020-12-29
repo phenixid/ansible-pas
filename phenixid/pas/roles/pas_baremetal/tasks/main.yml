@@ -39,10 +39,3 @@
 
 - include_role:
     name: phenixid.pas.pas
-
-- name: "Start pas"
-  command: "/usr/local/bin/pasctl start"
-  environment:
-    PAS_HOME: "{{ pas_home }}"
-    JAVA_HOME: "{{ java_home }}"
-  become_user: "{{ pas_service_user }}"

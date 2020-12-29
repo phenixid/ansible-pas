@@ -6,6 +6,7 @@ After=network.target
 Type=forking
 WorkingDirectory={{ digo_home }}
 Environment=DIGO_HOME={{ digo_home }}
+Environment=JAVA_HOME={{ java_home }}
 ExecStart={{ digo_home }}/start.sh
 User={{ digo_service_user }}
 Group={{ digo_service_group }}

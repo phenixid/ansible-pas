@@ -1,5 +1,23 @@
 ---
 
+- name: "Create certificate directory"
+  file:
+    path: "{{ pas_fedsign_jwt_certificate.remote_path }}"
+    state: directory
+    owner: "{{ pas_service_user }}"
+    group: "{{ pas_service_group }}"
+    mode: 0500
+  become: yes
+
+- name: "Add certificate for jwt validation"
+  copy:
+    src: "{{ pas_fedsign_jwt_certificate.local_path }}"
+    dest: "{{ pas_fedsign_jwt_certificate.remote_path }}/{{ pas_fedsign_jwt_certificate.local_path | basename }}"
+    owner: "{{ pas_service_user }}"
+    group: "{{ pas_service_group }}"
+    mode: 0400
+  become: yes
+
 - name: "Waiting for config API to become available..."
   wait_for:
     host: "{{ pas_config_api_host }}"
