@@ -1,0 +1,41 @@
+---
+
+- name: "Add system group {{ digo_service_group }}"
+  group:
+    name: "{{ digo_service_group }}"
+    system: yes
+    state: present
+  become: yes
+
+- name: "Add system user {{ digo_service_user }}"
+  user:
+    name: "{{ digo_service_user }}"
+    groups: "{{ digo_service_group }}"
+    append: no
+    system: yes
+    shell: /bin/sh
+    state: present
+  become: yes
+
+- name: "Upload {{ digo_installer.local_path }} to {{ digo_installer.remote_path }}"
+  copy:
+    src: "{{ digo_installer.local_path }}"
+    dest: "{{ digo_installer.remote_path }}/"
+    mode: 0400
+    force: yes
+    owner: "{{ digo_service_user }}"
+    group: "{{ digo_service_group }}"
+  when: digo_installer.remote_path is not undefined
+  become: yes
+
+- name: "Install digoctl"
+  template:
+    src: "digoctl.sh.j2"
+    dest: "/usr/local/bin/digoctl"
+    mode: 0550
+    owner: "{{ digo_service_user }}"
+    group: "{{ digo_service_group }}"
+  become: yes
+
+- include_role:
+    name: phenixid.digo.digo

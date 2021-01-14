@@ -1,0 +1,11 @@
+---
+
+- name: "Install and start systemd PAS"
+  include_role:
+    name: phenixid.pas.pas_systemd
+  when: skip_install|default(False) == False
+
+- name: "Configure signing service"
+  include_role:
+    name: phenixid.pas.signing_service
+  when: skip_configure|default(False) == False

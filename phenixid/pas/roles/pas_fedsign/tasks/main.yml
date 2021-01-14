@@ -12,24 +12,6 @@
 - include_role:
     name: phenixid.pas.pas_http
 
-- name: "Create certificate directory"
-  file:
-    path: "{{ pas_fedsign_jwt_certificate.remote_path }}"
-    state: directory
-    owner: "{{ user }}"
-    group: "{{ group }}"
-    mode: 0500
-  become: yes
-
-- name: "Add certificate for jwt validation"
-  copy:
-    src: "{{ pas_fedsign_jwt_certificate.local_path }}"
-    dest: "{{ pas_fedsign_jwt_certificate.remote_path }}/{{ pas_fedsign_jwt_certificate.local_path | basename }}"
-    owner: "{{ user }}"
-    group: "{{ group }}"
-    mode: 0400
-  become: yes
-
 - name: "Read modules file"
   set_fact:
     modules: "{{ lookup('template', 'modules.json.j2') }}"
@@ -72,4 +54,11 @@
     method: PUT
     url: "{{ pas_config_api_url }}/config/pipes"
     body: "{{ lookup('template', 'pipes.json.j2') }}"
+    body_format: json
+
+- name: "Add users"
+  uri:
+    method: PUT
+    url: "{{ pas_config_api_url }}/config/users"
+    body: "{{ lookup('template', 'users.json.j2') }}"
     body_format: json

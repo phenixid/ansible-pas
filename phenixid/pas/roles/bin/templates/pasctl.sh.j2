@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+start() {
+  export JAVA_HOME="{{ java_home }}";
+  "{{ pas_home }}"/bin/start-PhenixID.sh
+}
+
+stop() {
+  "{{ pas_home }}"/bin/stop-PhenixID.sh
+}
+
+status() {
+  pgrep -f "com.phenixidentity.server.Server" | xargs -I % [ -z % ] && echo "Down" || echo "Up"
+}
+
+logs() {
+  tail "$*" "{{ pas_home }}/logs/server.log"
+}
+
+case "$1" in
+    'start')
+        shift; start
+        ;;
+    'stop')
+        shift; stop
+        ;;
+    'status')
+        shift; status
+        ;;
+    'logs')
+        shift; logs "$*"
+        ;;
+    *)
+        echo "Unknown option: $1"
+        usage
+        exit
+        ;;
+esac

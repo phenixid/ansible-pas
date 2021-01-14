@@ -1,0 +1,5 @@
+---
+# defaults file for digo_service
+
+java_home: ""
+digo_service_state: started

@@ -1,0 +1,41 @@
+---
+
+- name: "Add system group {{ pas_service_group }}"
+  group:
+    name: "{{ pas_service_group }}"
+    system: yes
+    state: present
+  become: yes
+
+- name: "Add system user {{ pas_service_user }}"
+  user:
+    name: "{{ pas_service_user }}"
+    groups: "{{ pas_service_group }}"
+    append: no
+    system: yes
+    shell: /bin/sh
+    state: present
+  become: yes
+
+- name: "Upload {{ pas_installer.local_path }} to {{ pas_installer.remote_path }}"
+  copy:
+    src: "{{ pas_installer.local_path }}"
+    dest: "{{ pas_installer.remote_path }}/"
+    mode: 0400
+    force: yes
+    owner: "{{ pas_service_user }}"
+    group: "{{ pas_service_group }}"
+  when: pas_installer.remote_path is not undefined
+  become: yes
+
+- name: "Install pasctl"
+  template:
+    src: "pasctl.sh.j2"
+    dest: "/usr/local/bin/pasctl"
+    mode: 0550
+    owner: "{{ pas_service_user }}"
+    group: "{{ pas_service_group }}"
+  become: yes
+
+- include_role:
+    name: phenixid.pas.pas

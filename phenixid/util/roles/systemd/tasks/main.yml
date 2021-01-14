@@ -1,17 +1,17 @@
 ---
 # tasks file for systemd
 
-- name: "Add group {{ group }}"
+- name: "Add group {{ service_group }}"
   group:
-    name: "{{ group }}"
+    name: "{{ service_group }}"
     system: yes
     state: present
   become: true
 
-- name: "Add no-login system user {{ user }}"
+- name: "Add no-login system user {{ service_user }}"
   user:
-    name: "{{ user }}"
-    groups: "{{ group }}"
+    name: "{{ service_user }}"
+    groups: "{{ service_group }}"
     shell: /sbin/nologin
     append: no
     system: yes

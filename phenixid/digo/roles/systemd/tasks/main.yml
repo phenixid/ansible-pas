@@ -1,0 +1,60 @@
+---
+
+
+- name: "Add group {{ digo_service_group }}"
+  group:
+    name: "{{ digo_service_group }}"
+    system: yes
+    state: present
+  become: yes
+
+- name: "Add no-login system user {{ digo_service_user }}"
+  user:
+    name: "{{ digo_service_user }}"
+    groups: "{{ digo_service_group }}"
+    shell: /sbin/nologin
+    append: no
+    system: yes
+    state: present
+  become: yes
+
+- name: "Upload {{ digo_installer.local_path }} to {{ digo_installer.remote_path }}"
+  copy:
+    src: "{{ digo_installer.local_path }}"
+    dest: "{{ digo_installer.remote_path }}/"
+    mode: 0400
+    force: yes
+    owner: "{{ digo_service_user }}"
+    group: "{{ digo_service_group }}"
+  when: digo_installer.remote_path is not undefined
+  become: yes
+
+- name: "Check service 'digo' is installed"
+  stat:
+    path: "/etc/systemd/system/digo.service"
+  register: service_stat
+
+- name: "Stop service 'digo'"
+  systemd:
+    state: stopped
+    name: "digo"
+  become: yes
+  when: service_stat.stat.exists
+  ignore_errors: yes
+
+- name: "Install service file /etc/systemd/system/digo.service"
+  template:
+    src: "digo.service.j2"
+    dest: "/etc/systemd/system/digo.service"
+    mode: 0644
+  become: yes
+
+- include_role:
+    name: phenixid.digo.digo
+
+- name: "Service state: {{ digo_service_state }}"
+  systemd:
+    state: "{{ digo_service_state }}"
+    daemon_reload: yes
+    name: digo
+  become: yes

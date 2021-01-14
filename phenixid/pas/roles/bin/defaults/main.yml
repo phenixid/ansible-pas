@@ -1,0 +1,4 @@
+---
+# defaults file for pas_baremetal
+
+java_home: ""

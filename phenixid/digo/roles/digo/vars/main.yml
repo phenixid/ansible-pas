@@ -2,4 +2,8 @@
 # vars file for digo
 
 digo_home: "{{ digo_install_directory }}/digo"
+digo_installer_path: "{{ digo_installer.remote_path | default(digo_installer.local_path | dirname) }}/{{ digo_installer.local_path | basename }}"
 pas_sp_idp_id: "{{ signing_service_idp_id }}"
+digo_saml_trust_path: "{{ digo_saml_trust.remote_path | default(digo_saml_trust.local_path | dirname) }}/{{ digo_saml_trust.local_path | basename }}"
+digo_private_key_path: "{{ digo_private_key.remote_path | default(digo_private_key.local_path | dirname) }}/{{ digo_private_key.local_path | basename }}"
+digo_certificate_path: "{{ digo_certificate.remote_path | default(digo_certificate.local_path | dirname) }}/{{ digo_certificate.local_path | basename }}"

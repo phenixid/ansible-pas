@@ -1,0 +1,18 @@
+[Unit]
+Description=PhenixID Authentication Service
+After=network.target
+
+[Service]
+Type=forking
+WorkingDirectory={{ pas_home }}
+Environment=JAVA_HOME={{ java_home }}
+ExecStart={{ pas_home }}/bin/start-PhenixID.sh
+User={{ pas_service_user }}
+Group={{ pas_service_group }}
+UMask=0007
+Restart={{ service_restart | default('always') }}
+RestartSec={{ service_restart_sec | default(60) }}
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target

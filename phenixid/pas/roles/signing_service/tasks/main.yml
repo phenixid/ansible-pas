@@ -1,22 +1,22 @@
 ---
 
-- include_role:
-    name: phenixid.util.systemd
-  vars:
-    service_name: pas
-  when: skip_install|default(False) == False
-
-- include_role:
-    name: phenixid.pas.pas
-  when: skip_install|default(False) == False
-
-- name: "Start service"
-  systemd:
-    state: started
-    daemon_reload: yes
-    name: pas
+- name: "Create certificate directory"
+  file:
+    path: "{{ pas_fedsign_jwt_certificate.remote_path }}"
+    state: directory
+    owner: "{{ pas_service_user }}"
+    group: "{{ pas_service_group }}"
+    mode: 0500
   become: yes
-  when: skip_install|default(False) == False
+
+- name: "Add certificate for jwt validation"
+  copy:
+    src: "{{ pas_fedsign_jwt_certificate.local_path }}"
+    dest: "{{ pas_fedsign_jwt_certificate.remote_path }}/{{ pas_fedsign_jwt_certificate.local_path | basename }}"
+    owner: "{{ pas_service_user }}"
+    group: "{{ pas_service_group }}"
+    mode: 0400
+  become: yes
 
 - name: "Waiting for config API to become available..."
   wait_for:
@@ -24,7 +24,8 @@
     port: "{{ pas_config_api_port }}"
   when: skip_configure|default(False) == False
 
-- include_role:
+- name: "Configure federated signing"
+  include_role:
     name: phenixid.pas.pas_fedsign
   when: skip_configure|default(False) == False
 
