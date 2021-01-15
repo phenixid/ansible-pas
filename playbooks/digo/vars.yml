@@ -40,6 +40,7 @@ signing_service_private_port: "8444"
 digo_install_directory: "/opt/phenixid"
 digo_installer: {  type: "installer", local_path: "/path/to/digo-phenixid-0.59-lib.tar.gz", remote_path: "/home/{{ user }}" }
 digo_public_port: 8080
+digo_api_port: 8081
 
 digo_file_location_id: 1
 digo_file_location_path: "/opt/files"
