@@ -38,14 +38,6 @@
   when: pas_installer.type == "installer"
   become: yes
 
-- name: "Set permissions for installer"
-  file:
-    path: "{{ pas_installer_path }}"
-    owner: "{{ pas_service_user }}"
-    group: "{{ pas_service_group }}"
-    mode: 0500
-  become: yes
-
 - name: "Install from {{ pas_installer_path }} to {{ pas_home | dirname }}"
   command: "{{ pas_installer_path }} -q -varfile {{ pas_home }}/install.varfile"
   when: pas_installer.type == "installer"

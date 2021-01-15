@@ -7,6 +7,7 @@
     owner: "{{ pas_service_user }}"
     group: "{{ pas_service_group }}"
     mode: 0500
+  when: pas_fedsign_jwt_certificate.remote_path is not undefined
   become: yes
 
 - name: "Add certificate for jwt validation"
@@ -16,6 +17,7 @@
     owner: "{{ pas_service_user }}"
     group: "{{ pas_service_group }}"
     mode: 0400
+  when: pas_fedsign_jwt_certificate.remote_path is not undefined
   become: yes
 
 - name: "Waiting for config API to become available..."
