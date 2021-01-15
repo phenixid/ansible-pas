@@ -1,17 +1,8 @@
 ---
 
-- hosts: sign
-  vars_files:
-    - "vars.yml"
-  vars:
-    - skip_install: false
-    - skip_configure: false
-  roles:
-    - phenixid.pas.signing_service
-
 - hosts: digo
   vars_files:
     - "vars.yml"
   roles:
-    - phenixid.digo.digo_service
+    - phenixid.digo.systemd
 
