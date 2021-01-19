@@ -108,7 +108,7 @@
     owner: "{{ pas_service_user }}"
     group: "{{ pas_service_group }}"
   become: yes
-  when: pas_log4j2_config_file is defined
+  when: pas_log4j2_config_file is defined and not pas_log4j2_config_file == ""
 
 - name: "Add start script"
   copy:
@@ -117,7 +117,7 @@
     owner: "{{ pas_service_user }}"
     group: "{{ pas_service_group }}"
   become: yes
-  when: pas_start_script is defined
+  when: pas_start_script is defined and not pas_start_script == ""
 
 - name: "Add license"
   copy:
