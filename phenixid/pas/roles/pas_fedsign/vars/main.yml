@@ -7,3 +7,6 @@ pas_sp_acs_url: "{{ pas_fedsign_service_url }}/authenticate/{{ pas_sp_authentica
 pas_sp_success_url: "{{ pas_fedsign_service_url }}/sign/api/sign"
 
 pas_ca_keystore_id: "{{ pas_keystore_id }}"
+
+pas_fedsign_jwt_cert_path: "{{ pas_fedsign_jwt_certificate.remote_path | default(pas_fedsign_jwt_certificate.local_path | dirname) }}/{{ pas_fedsign_jwt_certificate.local_path | basename }}"
+

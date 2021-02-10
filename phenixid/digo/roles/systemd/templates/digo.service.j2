@@ -11,8 +11,8 @@ ExecStart={{ digo_home }}/start.sh
 User={{ digo_service_user }}
 Group={{ digo_service_group }}
 UMask=0007
-Restart={{ service_restart | default('no') }}
-RestartSec={{ service_restart_sec | default(60) }}
+Restart={{ digo_service_restart }}
+RestartSec={{ digo_service_restart_sec }}
 SuccessExitStatus=143
 
 [Install]

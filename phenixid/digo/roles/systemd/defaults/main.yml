@@ -3,3 +3,6 @@
 
 java_home: ""
 digo_service_state: started
+digo_service_restart: always
+digo_service_restart_sec: 60
+
