@@ -150,12 +150,7 @@
         "config": {
           "access_token": "access_token",
           "certfilepath": "{{ pas_fedsign_jwt_cert_path }}",
-          "additional_attributes": [
-            "id",
-            "failURL",
-            "successURL",
-            "cancelURL"
-          ]
+          "additional_attributes": {{ pas_fedsign_jwt_attributes }}
         }
       },
       {
@@ -165,6 +160,13 @@
           "id": "{{ '{{item.jwt_id}}' }}",
           "require_session": "true",
           "require_auth_session": "false"
+        }
+      },
+      {
+        "name": "ItemRenameValve",
+        "enabled": "true",
+        "config": {
+          "dest_id": "{{ '{{item.jwt_userId}}' }}"
         }
       },
       {

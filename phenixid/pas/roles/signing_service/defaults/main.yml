@@ -2,3 +2,4 @@
 # defaults file for signing_service
 
 signing_service_sp_force_authn: yes
+pas_fedsign_jwt_attributes: signing_service_jwt_attributes | default(["id", "failURL", "successURL", "cancelURL"])
