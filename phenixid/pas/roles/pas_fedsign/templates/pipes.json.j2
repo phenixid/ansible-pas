@@ -27,11 +27,19 @@
           "dest_id": "{{ '{{request.session_id}}' }}"
         }
       },
-      {% for property in pas_fedsign_subject_key_properties %}
+      {% for property in pas_fedsign_assertion_attributes %}
       {
         "name": "PropertyFromSessionToItem",
         "config": {
           "source": "{{ property }}"
+        }
+      },
+      {% endfor %}
+      {% for property in pas_fedsign_jwt_attributes %}
+      {
+        "name": "PropertyFromSessionToItem",
+        "config": {
+          "source": "jwt_{{ property }}"
         }
       },
       {% endfor %}
