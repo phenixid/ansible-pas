@@ -56,5 +56,6 @@
   systemd:
     state: "{{ digo_service_state }}"
     daemon_reload: yes
+    enabled: yes
     name: digo
   become: yes
