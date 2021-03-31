@@ -19,7 +19,8 @@ pas_pipes_http_configuration_ref: "{{ _pas_http_servers[1].id }}"
 pas_pipes_http_enabled: yes
 pas_pipes_http_port: "{{ _pas_http_servers[1].port }}"
 
-pas_fedsign_subject_key_properties: "{{ signing_service_subject_key_properties }}"
+pas_fedsign_jwt_attributes: "{{ signing_service_jwt_attributes }}"
+pas_fedsign_assertion_attributes: "{{ signing_service_assertion_attributes }}"
 pas_fedsign_subject_key: "{{ signing_service_subject_key }}"
 pas_fedsign_jwt_certificate: "{{ signing_service_jwt_certificate }}"
 pas_fedsign_file_store_name: "session"
