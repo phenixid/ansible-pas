@@ -1,27 +1,25 @@
 {
   "publicUrl": "{{ digo_service_url }}",
+  "apiHost": "{{ digo_public_interface }}",
   "primaryServerPort": {{ digo_public_port }},
-  "apiPort": {{ digo_api_port }},
-  "automationApiEnabled": {{ digo_automation_api_enabled }},
+  "automationApiEnabled": {{ digo_automation_api_enabled | bool | lower }},
+  "automationApiHost": "{{ digo_automation_api_interface }}",
+  "apiPort": {{ digo_automation_api_port }},
   "logoutUrl": "{{ digo_logout_url }}",
+  "logNetworkActivity": {{ digo_log_network_activity | bool | lower }},
   "database": {
     "url": "{{ digo_db_url }}",
     "user": "{{ digo_db_user }}",
     "password": "{{ digo_db_password }}",
-    "maxPoolSize": "5",
+    "max_pool_size": {{ digo_db_max_pool_size }},
+    "min_pool_size": {{ digo_db_min_pool_size }},
+    "initial_pool_size": {{ digo_db_initial_pool_size }},
+    "max_idle_time": {{ digo_db_max_idle_time }},
     "changelog": "db_migrations/changelog.master.xml",
     "migrations_enabled": true,
     "driver_class": "com.microsoft.sqlserver.jdbc.SQLServerDriver"
   },
-  "events": {
-    "replayBatchSize": "1000"
-  },
   "signingOrders": {
-    "expiration": {
-      "schedule": "0 0/5 * * * ?",
-      "batchInterval": 10000,
-      "batchSize": 1000
-    },
     "fileDirectory": "{{ digo_file_location_path }}",
     "documentLocationId": {{ digo_file_location_id }}
   },
