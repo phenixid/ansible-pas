@@ -28,8 +28,9 @@ signing_service_jwt_certificate: { local_path: "/path/to/digo-cert.pem", remote_
 signing_service_ca_keystore: "/path/to/ca.p12"
 signing_service_ca_keystore_password: "cCqtZmgH4WTCF2U5"
 signing_service_ca_keystore_alias: "0"
-signing_service_subject_key_properties: ["cn", "sn", "mail"]
-signing_service_subject_key: "CN={{ '{{item.cn}}' }} {{ '{{item.sn}}' }} ({{ '{{item.mail}}' }}),dc=ad,dc=example,dc=org"
+signing_service_jwt_attributes: ["id", "failURL", "successURL", "cancelURL", "userId", "userMail"]
+signing_service_assertion_attributes: ["cn", "sn", "mail"]
+signing_service_subject_key: "CN={{ '{{item.cn}}' }} {{ '{{item.sn}}' }} ({{ '{{item.jwt_userMail}}' }}),dc=ad,dc=stockholm,dc=org"
 
 signing_service_ca_profiles: "pas_ca_profiles.json.j2"
 
