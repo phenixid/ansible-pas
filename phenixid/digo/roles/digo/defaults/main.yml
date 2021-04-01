@@ -1,12 +1,29 @@
 ---
 # defaults file for digo
 
+digo_public_interface: "0.0.0.0"
+digo_public_port: 8080
+digo_automation_api_enabled: no
+digo_automation_api_interface: "0.0.0.0"
+digo_automation_api_port: 8081
+digo_logout_url: "{{ digo_service_url }}"
+
+digo_db_initial_pool_size: 3
+digo_db_min_pool_size: 3
+digo_db_max_pool_size: 15
+digo_db_max_idle_time: 0
+
+digo_log_network_activity: no
+
 digo_user_service_ssl: no
 digo_user_service_ssl_client: no
 digo_user_service_ssl_trust_all: no
 digo_user_service_ssl_key_pass: ""
+
 digo_ssl_trust_file: ""
 digo_ssl_key_file: ""
+
 digo_custom_java_opts: ""
+
 digo_saml_skew_time: 30000
 
