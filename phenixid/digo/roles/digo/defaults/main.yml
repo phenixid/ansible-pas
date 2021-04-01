@@ -26,4 +26,4 @@ digo_ssl_key_file: ""
 digo_custom_java_opts: ""
 
 digo_saml_skew_time: 30000
-
+digo_saml_authority_solicitor: "role:solicitor"
