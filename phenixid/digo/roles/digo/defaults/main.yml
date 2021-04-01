@@ -27,3 +27,5 @@ digo_custom_java_opts: ""
 
 digo_saml_skew_time: 30000
 digo_saml_authority_solicitor: "role:solicitor"
+
+digo_http_session_timeout: 1800000
