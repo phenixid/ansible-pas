@@ -35,3 +35,4 @@ digo_file_rentention_inactive_age: "PT12H"
 digo_file_rentention_completed_age: "P30D"
 
 digo_tenant_id: "default"
+digo_private_key_password: "{{ None }}"
