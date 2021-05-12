@@ -1,10 +1,11 @@
 {
+  "tenantId": "{{ digo_tenant_id }}",
   "publicUrl": "{{ digo_service_url }}",
-  "apiHost": "{{ digo_public_interface }}",
+  "primaryServerInterface": "{{ digo_public_interface }}",
   "primaryServerPort": {{ digo_public_port }},
   "automationApiEnabled": {{ digo_automation_api_enabled | bool | lower }},
-  "automationApiHost": "{{ digo_automation_api_interface }}",
-  "apiPort": {{ digo_automation_api_port }},
+  "automationApiInterface": "{{ digo_automation_api_interface }}",
+  "automationApiPort": {{ digo_automation_api_port }},
   "logoutUrl": "{{ digo_logout_url }}",
   "logNetworkActivity": {{ digo_log_network_activity | bool | lower }},
   "sessionTimeout": {{ digo_http_session_timeout }},
@@ -31,7 +32,8 @@
   },
   "jwt": {
     "privateKeyFile": "{{ digo_private_key_path }}",
-    "publicCertFile": "{{ digo_certificate_path }}"
+    "publicCertFile": "{{ digo_certificate_path }}",
+    "privateKeyFilePassword": "{{ digo_private_key_password }}"
   },
   "signingService": {
     "url": "{{ digo_signing_service_url }}/authenticate/logout/?nextTarget={{ digo_signing_service_url }}/"
