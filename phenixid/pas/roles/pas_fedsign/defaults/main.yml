@@ -7,6 +7,7 @@ pas_keystore_resource_id: "da6ca709-bcd9-4067-8519-4d22e187e473"
 
 pas_ca_ca_id: "0ad5257c-a206-48b1-8bda-a6b43e6038a6"
 pas_ca_ca_alias: "ca"
+pas_fedsign_ca_days_valid: 180
 pas_ca_issuer_pipe_id: "57379810-60c9-48f5-88fd-72a8a40cd54a"
 pas_ca_revoke_pipe_id: "e3191fbd-288b-487a-ac0c-8eb0d7fc1733"
 
