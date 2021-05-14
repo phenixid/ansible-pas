@@ -1,8 +1,0 @@
----
-
-- hosts: digo
-  vars_files:
-    - "vars.yml"
-  roles:
-    - phenixid.digo.systemd
-

@@ -5,13 +5,16 @@
 user: "phxid"
 group: "phxid"
 pas_home: "/opt/phenixid/pas"
-pas_installer: {  type: "installer", local_path: "/path/to/phxid_server_linux_x64_3_2_0.sh", remote_path: "/home/{{ user }}" }
+pas_installer:
+  type: "installer"
+  local_path: "/path/to/phxid_server_linux_x64_3_2_0.sh"
+  remote_path: "/usr/local"
 pas_license_file: "/path/to/license.p12"
+pas_license_password: "<password>"
 pas_start_script: "start-PhenixID.sh"
 pas_enc_key: "<secret>"
-pas_admin_user: "phxid"
+pas_admin_user: "<user>"
 pas_admin_password: "<secret>"
-pas_license_password: "<secret>"
 pas_session_cluster_password: "<secret>"
 pas_session_cluster_interface: "{{ hostvars[inventory_hostname]['ansible_eth0']['ipv4']['address'] }}"
 pas_session_cluster_members: "{{ groups['sign'] | reject('search', inventory_hostname) | map('extract', hostvars, ['ansible_eth0', 'ipv4', 'address']) | list }}"
@@ -23,23 +26,24 @@ pas_config_api_url: "http://{{ pas_config_api_host }}:{{ pas_config_api_port }}"
 signing_service_client_url: "{{ digo_service_url }}"
 signing_service_idp_metadata: "idp.xml"
 signing_service_idp_id: "idp.phenixid.se"
-signing_service_sp_id: "spsign.dev.digo"
-signing_service_jwt_certificate: { local_path: "/path/to/digo-cert.pem", remote_path: "/opt/phenixid/certs" }
+signing_service_sp_id: "spsign.demo.digo"
 signing_service_ca_keystore: "/path/to/ca.p12"
-signing_service_ca_keystore_password: "cCqtZmgH4WTCF2U5"
+signing_service_ca_keystore_password: "<secret>"
 signing_service_ca_keystore_alias: "0"
 signing_service_jwt_attributes: ["id", "failURL", "successURL", "cancelURL", "userId", "userMail"]
 signing_service_assertion_attributes: ["cn", "sn", "mail"]
 signing_service_subject_key: "CN={{ '{{item.cn}}' }} {{ '{{item.sn}}' }} ({{ '{{item.jwt_userMail}}' }}),dc=ad,dc=stockholm,dc=org"
 
-signing_service_ca_profiles: "pas_ca_profiles.json.j2"
+signing_service_ca_profiles: "custom_pas_ca_profiles.json.j2"
 
-signing_service_public_port: "8080"
+signing_service_public_port: "8090"
 signing_service_private_port: "8444"
 
 # install and configure digo
 digo_install_directory: "/opt/phenixid"
-digo_installer: {  type: "installer", local_path: "/path/to/digo-phenixid-0.59-lib.tar.gz", remote_path: "/home/{{ user }}" }
+digo_installer:
+  local_path: "/path/to/digo-sthlm-1.5.3-lib.tar.gz"
+  remote_path: "/usr/local"
 digo_public_port: 8080
 digo_automation_api_port: 8081
 
@@ -49,28 +53,34 @@ digo_file_location_path: "/opt/files"
 digo_smtp_host: "smtp.sendgrid.net"
 digo_smtp_port: "587"
 digo_smtp_trust: "smtp.mailtrap.io"
-digo_smtp_from: "digo@example.org"
+digo_smtp_from: "digo@example.com"
 digo_smtp_enabled: false
 digo_smtp_username: "apikey"
 digo_smtp_password: "<token>"
 digo_smtp_auth_enabled: false
 
-digo_db_user: "sa"
+digo_db_user: "<user>"
 digo_db_password: "<secret>"
 
-digo_sp_id: "spauthn.dev.digo"
-digo_saml_trust: { local_path: "digo-saml-trust.pem", remote_path: "/opt/phenixid/certs"}
-digo_private_key: { local_path: "/path/to/digo-private-key.der", remote_path: "/opt/phenixid/certs" }
-digo_certificate: { local_path: "/path/to/digo-cert.pem", remote_path: "/opt/phenixid/certs" }
+digo_sp_id: "spauthn.demo.digo"
+digo_saml_trust:
+  local_path: "/path/to/digo-saml-trust.pem"
+  remote_path: "/opt/phenixid/trust"
+digo_private_key:
+  local_path: "/path/to/rsaprivkey.der"
+  remote_path: "/opt/phenixid/private"
+digo_certificate:
+  local_path: "/path/to/rsacert.pem"
+  remote_path: "/opt/phenixid/certs"
 
-digo_user_service_ssl: yes
-digo_user_service_ssl_client: yes
-digo_user_service_ssl_trust_all: no
-digo_user_service_ssl_trust: { local_path: "/path/to/trust/file.pem", remote_path: "/opt/phenixid/certs" }
-digo_user_service_ssl_key: { local_path: "/path/to/client/key.p12", remote_path: "/opt/phenixid/certs" }
-digo_user_service_ssl_key_pass: "<password>"
+digo_user_service_ssl: no
+digo_user_service_ssl_client: no
+digo_user_service_ssl_trust_all: yes
+#digo_user_service_ssl_trust: { local_path: "/path/to/trust/file.pem", remote_path: "/opt/phenixid/certs" }
+#digo_user_service_ssl_key: { local_path: "/path/to/client/key.p12", remote_path: "/opt/phenixid/private" }
+#digo_user_service_ssl_key_pass: "<password>"
 
-digo_saml_idp_id: "{{ pas_sp_idp_id }}"
+digo_saml_idp_id: "idp.phenixid.se"
 digo_saml_authority: "description"
 digo_saml_source: "source"
 digo_saml_first_name: "cn"

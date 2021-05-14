@@ -39,7 +39,7 @@
             </ds:X509Data>
         </ds:KeyInfo>
     </ds:Signature>
-    <md:EntityDescriptor ID="_bebafcd5-98d3-4a1b-80f3-d58952a2f78a" entityID="idp.example.org"
+    <md:EntityDescriptor ID="_bebafcd5-98d3-4a1b-80f3-d58952a2f78a" entityID="idp.phenixid.se"
                          xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata">
         <md:IDPSSODescriptor WantAuthnRequestsSigned="false"
                              protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
@@ -65,7 +65,7 @@
                 </ds:KeyInfo>
             </md:KeyDescriptor>
             <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
-                                    Location="http://idp.example.org:80/saml/authenticate/sign"/>
+                                    Location="http://ec2-18-192-69-184.eu-central-1.compute.amazonaws.com:8080/saml/authenticate/stockholm"/>
         </md:IDPSSODescriptor>
     </md:EntityDescriptor>
 </md:EntitiesDescriptor>

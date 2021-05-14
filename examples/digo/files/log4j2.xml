@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2015 PhenixID AB (http://phenixid.net) - All Rights Reserved
+  ~
+  ~  Proprietary and confidential
+  ~
+  ~  Unauthorized copying and distribution of this file (via any medium) is strictly prohibited
+  ~
+  ~  For more information please contact: info@phenixid.se
+  -->
+
+<Configuration monitorInterval="30">
+    <Appenders>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %t [%c{1}]  %p: %m%n"/>
+        </Console>
+        <RollingFile
+                name="FILE"
+                fileName="${env:DIGO_HOME}/logs/server.log"
+                filePattern="${env:DIGO_HOME}/logs/server.%date{yyyy-MM-dd}.log"
+                append="true">
+            <PatternLayout pattern="%d %t [%c{1}]  %p: %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+            </Policies>
+        </RollingFile>
+        <RollingFile
+                name="NETWORK"
+                fileName="${env:DIGO_HOME}/logs/network.log"
+                filePattern="${env:DIGO_HOME}/logs/network.%date{yyyy-MM-dd}.log"
+                append="true">
+            <PatternLayout pattern="%d %t [%c{1}]  %p: %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+            </Policies>
+        </RollingFile>
+        <RollingFile
+                name="DB"
+                fileName="${env:DIGO_HOME}/logs/db.log"
+                filePattern="${env:DIGO_HOME}/logs/db.%date{yyyy-MM-dd}.log"
+                append="true">
+            <PatternLayout pattern="%d %t [%c{1}]  %p: %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <AsyncLogger name="com.phenixidentity" level="TRACE"/>
+        <AsyncLogger name="org.opensaml" level="INFO"/>
+        <AsyncLogger name="com.microsoft.sqlserver.jdbc" level="INFO" additivity="false">
+            <AppenderRef ref="DB"/>
+        </AsyncLogger>
+        <AsyncLogger name="io.vertx.ext.web.handler" level="INFO" additivity="false">
+            <AppenderRef ref="NETWORK"/>
+        </AsyncLogger>
+        <AsyncLogger name="io.netty.handler.logging" level="ERROR" additivity="false">
+            <AppenderRef ref="NETWORK"/>
+        </AsyncLogger>
+        <Root level="WARN">
+            <AppenderRef ref="FILE"/>
+        </Root>
+    </Loggers>
+</Configuration>
