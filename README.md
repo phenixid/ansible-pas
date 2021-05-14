@@ -31,7 +31,7 @@ Make sure to change the version numbers in `requirements.yml` to match the Workf
 
  | Workflow | Collection |
  |----------|------------|
- | 1.5.3    | 2.3.0      |
+ | 1.5.3    | 2.4.0      |
 
 ## Apply Ansible roles to hosts
 
