@@ -21,6 +21,10 @@
     "migrations_enabled": true,
     "driver_class": "com.microsoft.sqlserver.jdbc.SQLServerDriver"
   },
+  "orderReminder": {
+    "enabled": {{ digo_order_reminder_enabled | bool | lower }},
+    "beforeExpiration": "{{ digo_order_reminder_at }}"
+  },
   "documentRetention": {
     "enabled": {{ digo_file_retention_enabled | bool | lower }},
     "inactiveDocumentAge": "{{ digo_file_rentention_inactive_age }}",

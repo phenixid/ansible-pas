@@ -1,0 +1,16 @@
+---
+
+- hosts: sign
+  vars_files:
+    - "vars.yml"
+  vars:
+    - skip_install: false
+    - skip_configure: false
+    - pas_service_user: "{{ user }}"
+    - pas_service_group: "{{ group }}"
+    - signing_service_jwt_certificate: "{{ digo_certificate }}"
+    - signing_service_pas_user: "{{ pas_admin_user }}"
+    - signing_service_pas_user_password: "{{ pas_admin_password }}"
+  roles:
+    - phenixid.pas.systemd
+    - phenixid.pas.signing_service

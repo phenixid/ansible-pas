@@ -36,6 +36,9 @@ JAVA_OPTS="${JAVA_OPTS} -XX:CMSInitiatingOccupancyFraction=75"
 JAVA_OPTS="${JAVA_OPTS} -XX:+UseCMSInitiatingOccupancyOnly"
 JAVA_OPTS="${JAVA_OPTS} -XX:MaxDirectMemorySize=512G"
 
+# JAVA_OPTS="${JAVA_OPTS} -XX:+UnlockCommercialFeatures"
+# JAVA_OPTS="${JAVA_OPTS} -XX:+FlightRecorder"
+
 
 # JMX/management
 #JAVA_OPTS="${JAVA_OPTS} -Dcom.sun.management.jmxremote.port=7199"

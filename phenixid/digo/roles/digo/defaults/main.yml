@@ -36,3 +36,6 @@ digo_file_rentention_completed_age: "P30D"
 
 digo_tenant_id: "default"
 digo_private_key_password: "{{ None }}"
+
+digo_order_reminder_enabled: no
+digo_order_reminder_at: "P2D"
