@@ -1,9 +1,9 @@
 ---
 
 collections:
-  - name: "git@github.com:phenixid/ansible-pas.git#/phenixid/digo"
+  - name: "https://github.com/phenixid/ansible-pas.git#/phenixid/digo"
     type: git
-    version: "v2.4.0"
-  - name: "git@github.com:phenixid/ansible-pas.git#/phenixid/pas"
+    version: "v2.5.0"
+  - name: "https://github.com/phenixid/ansible-pas.git#/phenixid/pas"
     type: git
-    version: "v2.4.0"
+    version: "v2.5.0"
