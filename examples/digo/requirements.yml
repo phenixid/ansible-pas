@@ -3,7 +3,7 @@
 collections:
   - name: "https://github.com/phenixid/ansible-pas.git#/phenixid/digo"
     type: git
-    version: "v2.5.0"
+    version: "v2.5.1"
   - name: "https://github.com/phenixid/ansible-pas.git#/phenixid/pas"
     type: git
-    version: "v2.5.0"
+    version: "v2.5.1"
