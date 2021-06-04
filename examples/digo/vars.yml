@@ -49,9 +49,11 @@ digo_automation_api_port: 8081
 
 digo_file_location_id: 1
 digo_file_location_path: "/opt/files"
-digo_file_retention_enabled: yes
 digo_order_reminder_enabled: yes
-digo_order_reminder_at: "P3D"
+digo_order_reminder_at: "P2D"
+digo_file_retention_enabled: yes
+digo_file_rentention_inactive_age: "PT12H"
+digo_file_rentention_completed_age: "P30D"
 
 digo_smtp_host: "smtp.sendgrid.net"
 digo_smtp_port: "587"
