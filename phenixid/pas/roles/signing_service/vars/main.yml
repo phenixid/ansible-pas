@@ -40,6 +40,5 @@ pas_sp_idp_id: "{{ signing_service_idp_id }}"
 pas_sp_idp_metadata: "{{ signing_service_idp_metadata }}"
 pas_sp_force_authn: "{{ signing_service_sp_force_authn }}"
 
-pas_http_allowed_logout_target: ".*{{ signing_service_client_url }}.*|.*{{ signing_service_url }}.*"
 pas_http_default_port: "{{ _pas_http_servers[0].port }}"
 pas_http_use_ssl: "{{ _pas_http_servers[0].ssl }}"

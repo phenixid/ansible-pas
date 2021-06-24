@@ -81,12 +81,20 @@
         }
       },
       {
-        "name": "PADESSignValve",
-        "enabled": "true",
-        "config": {
-          "keyStoreID": "{{ '{{item.keyStoreId}}' }}",
-          "pdfSourceData": "{{ '{{item.temporary}}' }}",
-          "pdfTarget": "document"
+        "name" : "PADESSignVisibleSignatureValve",
+        "enabled" : "true",
+        "config" : {
+          "keyStoreID" : "{{ pas_fedsign_keystore_id }}",
+          "pdfSourceData" : "{{ pas_fedsign_pdf_source_data }}",
+          "backDropImage" : "{{ pas_fedsign_backdrop_img }}",
+          "signText" : "{{ pas_fedsign_sign_text }}",
+          "signingPage" : "{{ pas_fedsign_signing_page }}",
+          "topOffset" : "{{ pas_fedsign_top_offset }}",
+          "leftOffset" : "{{ pas_fedsign_left_offset }}",
+          "padding" : "{{ pas_fedsign_padding }}",
+          "headingSignerText": "{{ pas_fedsign_heading_signer_text }}",
+          "headingDateText": "{{ pas_fedsign_heading_date_text }}",
+          "pdfTarget" : "{{ pas_fedsign_pdf_target }}"
         }
       },
       {

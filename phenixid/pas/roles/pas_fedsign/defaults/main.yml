@@ -1,13 +1,24 @@
 ---
 
 pas_fedsign_authenticator_alias: "pdf_sign_auth_00"
+pas_fedsign_ca_days_valid: 180
+pas_fedsign_keystore_id: "{{ '{{item.keyStoreId}}' }}"
+pas_fedsign_pdf_source_data: "{{ '{{item.temporary}}' }}"
+pas_fedsign_backdrop_img: "resources/underskriftstaden11.png"
+pas_fedsign_sign_text: "{{ '{{item.givenName}} {{item.sn}}' }}"
+pas_fedsign_signing_page: "resources/linkpage.pdf"
+pas_fedsign_top_offset: "35"
+pas_fedsign_left_offset: "35"
+pas_fedsign_padding: "5"
+pas_fedsign_heading_signer_text: "Undertecknad av"
+pas_fedsign_heading_date_text: "Datum"
+pas_fedsign_pdf_target: "document"
 
 pas_keystore_id: "e6f3b4f6-7687-40cd-9947-44f0a2743c64"
 pas_keystore_resource_id: "da6ca709-bcd9-4067-8519-4d22e187e473"
 
 pas_ca_ca_id: "0ad5257c-a206-48b1-8bda-a6b43e6038a6"
 pas_ca_ca_alias: "ca"
-pas_fedsign_ca_days_valid: 180
 pas_ca_issuer_pipe_id: "57379810-60c9-48f5-88fd-72a8a40cd54a"
 pas_ca_revoke_pipe_id: "e3191fbd-288b-487a-ac0c-8eb0d7fc1733"
 
@@ -17,7 +28,6 @@ pas_sp_sp_metadata_id: "7fa29649-fa18-4824-9127-3509314fa43e"
 pas_sp_sp_metadata_resource_id: "70342389-a054-408b-810c-a0e13f1e89b7"
 pas_sp_idp_metadata_id: "0e48cfd8-11b7-4959-a906-d2f4521ab0cb"
 pas_sp_idp_metadata_resource_id: "75f54760-3c82-4b1b-aa22-fd91ace3bf97"
-
 pas_sp_authenticator_alias: "pdf_sign_auth_01"
 pas_sp_acs_pipe_id: "signing_assertion_consumer"
 pas_sp_sign_keystore_id: "{{ pas_keystore_id }}"
